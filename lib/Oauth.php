@@ -62,7 +62,7 @@ class Oauth {
         $params = array(
             'response_type' => 'code',
             'client_id' => 'pufy2a7d',
-            'redirect_uri' => 'http://127.0.0.1:8000',
+            'redirect_uri' => 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],
         );    
         
         header('Location: ' . $this->prism->base_url . '/oauth/authorize'.'?'.http_build_query($params));
