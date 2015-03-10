@@ -1,21 +1,21 @@
 # Prsim PHP SDK
+========================================
 
-
-## 用途 ##
+## 用途
 ----------------------------------------
 实现Shopex Prism 的PHP版SDK供第三方使用
 
-## 功能 ##
+## 功能
 ----------------------------------------
 - 提供HTTP API调用（GET/POST/PUT/DELETE方式）
 - 提供Oauth认证
 - (连接Websocket，可以发布/消费/应答消息)
 
 
-## 用法 ##
+## 用法
 ----------------------------------------
 
-### 创建Prism Client实例对象 ###
+### 创建Prism Client实例对象
 
 ```php
 require_once('lib/Prism.php');
@@ -23,9 +23,9 @@ require_once('lib/Prism.php');
 $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 ```
 
-### 发起GET/POST/PUT/DELETE请求 ###
+### 发起GET/POST/PUT/DELETE请求
 
-_注意：
+_注意_：
 - GET方法参数通过Query传递
 - POST方法参数通过Body传递
 - PUT方法参数通过Body传递
