@@ -16,7 +16,7 @@
 ----------------------------------------
 
 ### 创建Prism Client实例对象
-
+---
 ```php
 require_once('lib/Prism.php');
 
@@ -24,12 +24,14 @@ $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $
 ```
 
 ### 发起一个请求
+---
 ```php
 echo $client->get('/test/test');
 ```
 返回: {"httpMethod":"GET","responseTime":"10ms"}
 
 ### 发起GET/POST/PUT/DELETE请求
+---
 
 *注意*：
 - GET方法参数通过Query传递
