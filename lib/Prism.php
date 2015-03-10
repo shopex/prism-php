@@ -1,7 +1,7 @@
 <?php
-require_once('lib/Sign.php');
-require_once('lib/Http.php');
-require_once('lib/Oauth.php');
+require_once('Sign.php');
+require_once('Http.php');
+require_once('Oauth.php');
 
 Class Prism {
 

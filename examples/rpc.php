@@ -14,7 +14,7 @@ $params = array(
 );
 
 // 如果有Toekn可以携带Token发起请求
-$client->access_token = $token->access_token;
+// $client->access_token = $token->access_token;
 
 $result['GET']      = $client->get('/test/test?param3=E&param4=F', $params, $headers);
 $result['POST']     = $client->post('/test/test?param3=E&param4=F', $params, $headers);
