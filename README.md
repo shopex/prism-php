@@ -21,12 +21,13 @@ $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $
 
 ### 发起GET/POST/PUT/DELETE请求 ###
 
-        GET方法参数通过Query传递
-        POST方法参数通过Body传递
-        PUT方法参数通过Body传递
-        DELETE方法参数通过Query传递
-        能够携带自定义Header
-        path中的query会被合并到Query或者Body里
+注意：
+- GET方法参数通过Query传递
+- POST方法参数通过Body传递
+- PUT方法参数通过Body传递
+- DELETE方法参数通过Query传递
+- 能够携带自定义Header
+- path中的query会被合并到Query或者Body里
 
 ```php
 $headers = array(
