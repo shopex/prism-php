@@ -6,8 +6,7 @@ class Curl {
 
     public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
 
-
-        // 初始化一个 cURL 对象
+        // 初始化一个cURL对象
         $curl = curl_init();
 
         // 设置你需要抓取的URL
@@ -50,6 +49,7 @@ class Curl {
 
 
         return $data;
+
     }
 
 }

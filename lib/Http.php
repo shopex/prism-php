@@ -1,14 +1,29 @@
 <?php
 require_once('Curl.php');
+require_once('Socket.php');
 
 class Http {
 
-    public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
+    var $requester;
+
+    function __construct($requester = null) {
         
         if (extension_loaded('curl'))
-            $http = new Curl();
+            $this->requester = new Curl();
+        else
+            $this->requester = new Socket();
 
-        return $http->sendRequest($http_method, $url, $headers, $postData);
+        if ($requester && $requester == 'curl')
+            $this->requester = new Curl();
+
+        if ($requester && $requester == 'socket')
+            $this->requester = new Socket();
+
+    }
+
+    public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
+
+        return $this->requester->sendRequest($http_method, $url, $headers, $postData);
 
     }
 

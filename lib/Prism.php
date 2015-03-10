@@ -8,7 +8,9 @@ Class Prism {
     public $base_url; //platform地址
     private $app_key; // key
     private $app_secret; // secret
+
     public $access_token; // access_token
+    public $requester; // http包选择
     
     public $client; //prism对象
     public $oauth; //oauth对象
@@ -81,7 +83,7 @@ Class Prism {
         
                 
         // 发起请求
-        $http = new Http();
+        $http = new Http($this->requester);
         return $http->sendRequest($http_method, $final_url, $headers, $postData);   
         
     }
