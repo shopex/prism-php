@@ -1,5 +1,5 @@
 # Prsim PHP SDK
-===
+========================================
 
 ## 用途
 ----------------------------------------
@@ -22,6 +22,12 @@ require_once('lib/Prism.php');
 
 $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 ```
+
+### 发起一个请求
+```php
+echo $client->get('/test/test');
+```
+返回: {"httpMethod":"GET","responseTime":"10ms"}
 
 ### 发起GET/POST/PUT/DELETE请求
 
