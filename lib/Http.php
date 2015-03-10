@@ -1,11 +1,19 @@
 <?php
+require_once('Curl.php');
+
 class Http {
-    
-    function __construct() {   
-    }
-    
+
     public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
         
+        if (extension_loaded('curl'))
+            $http = new Curl();
+
+        return $http->sendRequest($http_method, $url, $headers, $postData);
+
+    }
+
+    public function fileGetContents($http_method = 'GET', $url, $headers, $postData = null) {
+
         $opts = array(
             'http'=>array(
                 'method'=>$http_method
@@ -20,6 +28,7 @@ class Http {
         $context = stream_context_create($opts);
         
         return file_get_contents($url, false, $context);
+
     }
     
     /* - http_build_header -
