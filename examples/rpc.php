@@ -16,10 +16,26 @@ $params = array(
 // 如果有Toekn可以携带Token发起请求
 // $client->access_token = $token->access_token;
 
+$result = array();
+
 $result['GET']      = $client->get('/test/test?param3=E&param4=F', $params, $headers);
 $result['POST']     = $client->post('/test/test?param3=E&param4=F', $params, $headers);
 $result['PUT']      = $client->put('/test/test?param3=E&param4=F', $params, $headers);
 $result['DELETE']   = $client->delete('/test/test?param3=E&param4=F', $params, $headers);
 
-
 print_r($result);
+
+/*
+返回：
+Array
+(
+    [GET] => {"httpMethod":"GET","header1":"A","header2":"B","query":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}
+
+    [POST] => {"httpMethod":"POST","header1":"A","header2":"B","data":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}
+
+    [PUT] => {"httpMethod":"PUT","header1":"A","header2":"B","data":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}
+
+    [DELETE] => {"httpMethod":"DELETE","header1":"A","header2":"B","query":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}
+
+)
+*/

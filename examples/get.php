@@ -4,6 +4,7 @@ require_once('../lib/Prism.php');
 $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
 
-$result = $client->get('/test/test');
+echo $client->get('/test/test');
 
-//echo '1'.$result;
+// 返回
+// {"httpMethod":"GET","responseTime":"10ms"}
