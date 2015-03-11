@@ -25,6 +25,8 @@
 
 ### 发起一个请求
 -----------------------------------------
+发起GET请求：
+
     echo $client->get('/test/test');
 返回: 
 
@@ -51,9 +53,6 @@
         'param1' =>'C',
         'param2' =>'D',
     );
-
-    // 如果有Oauth Token可以携带Token发起请求
-    // $client->access_token = $token->access_token;
 
     $result['GET']      = $client->get('/test/test?param3=E&param4=F', $params, $headers);
     $result['POST']     = $client->post('/test/test?param3=E&param4=F', $params, $headers);
@@ -90,3 +89,30 @@
     $client->requester = 'curl';
     
 来选择使用哪种http底层方法。(在CURL开启的情况下会自动优先启用CURL连接)  
+
+
+### Oauth
+-----------------------------------------
+
+跳转到登录页面获取Token (需要在CGI环境下)
+
+    $token = $client->oauth();
+    
+返回：
+
+    stdClass Object
+    (
+        [access_token] => nkmabee4wxmhgjsqbeo2eg4g
+        [data] => stdClass Object
+            (
+                [@id] => test
+                [id] => 1
+                [name] => test
+                [passwd] => test
+            )
+        [expires_in] => 1425962899
+        [refresh_expires] => 1428551299
+        [refresh_token] => iaysxo7zyiwnk743uyyzaa7w3ee4nrea
+        [session_id] => npqsm6wxlobp745vqftzlu
+    )
+    
