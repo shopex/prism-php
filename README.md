@@ -41,7 +41,7 @@
 - 能够携带自定义Header
 - path中的query会被合并到Query或者Body里
 
-
+```php
     $headers = array(
         'X_API_UNITTEST1' => 'A',
         'X_API_UNITTEST2' => 'B'
@@ -62,22 +62,25 @@
 
 
     print_r($result);
-
+```
 
 返回：
 ```php
-Array                                                                                                                                                   
-(                                                                                                                                                       
-    [GET] => {"httpMethod":"GET","header1":"A","header2":"B","query":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}       
-                                                                                                                                                        
-    [POST] => {"httpMethod":"POST","header1":"A","header2":"B","data":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}      
-                                                                                                                                                        
-    [PUT] => {"httpMethod":"PUT","header1":"A","header2":"B","data":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}        
-                                                                                                                                                        
-    [DELETE] => {"httpMethod":"DELETE","header1":"A","header2":"B","query":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"} 
-                                                                                                                                                        
-)                                                                                                                                                       
+    Array                                                                                                                                                   
+    (                                                                                                                                                       
+        [GET] => {"httpMethod":"GET","header1":"A","header2":"B","query":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}       
+
+        [POST] => {"httpMethod":"POST","header1":"A","header2":"B","data":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}      
+
+        [PUT] => {"httpMethod":"PUT","header1":"A","header2":"B","data":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}        
+
+        [DELETE] => {"httpMethod":"DELETE","header1":"A","header2":"B","query":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"} 
+
+    )                                                                                                                                                       
 ```
+
+### CURL和Socket连接
+-----------------------------------------
 
 可以通过：
 
@@ -86,4 +89,4 @@ Array
 
     $client->requester = 'curl';
     
-来选择使用哪种http底层方法。    
+来选择使用哪种http底层方法。(在CURL开启的情况下会自动优先启用CURL连接)  
