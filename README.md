@@ -116,6 +116,8 @@
         [session_id] => npqsm6wxlobp745vqftzlu
     )
     
+-----------------------------------------    
+    
 验证Token
 
     $token = $client->oauth($token);
@@ -138,6 +140,8 @@
         [session_id] => npqsm6wxlobp745vqftzlu
     )
     
+-----------------------------------------     
+    
 刷新Token
 
     $token = $client->refreshToken($token);
@@ -159,12 +163,23 @@
         [session_id] => npqsm6wxlobp745vqftzlu
     )
 
-
+----------------------------------------- 
 
 退出登录 (需要在CGI环境下)
 
     $client->logout();
     
-返回
+返回：
 
     "session is remove"    
+    
+-----------------------------------------     
+    
+携带Token访问API
+
+    $client->access_token = $token->access_token;
+    echo $client->get('/test/test');
+
+返回：
+
+    {"httpMethod":"GET","oauth":"%40id=test&id=1&name=test&passwd=test","responseTime":"10ms"}    
