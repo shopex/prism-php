@@ -28,7 +28,7 @@
     echo $client->get('/test/test');
 返回: 
 
-    "{httpMethod":"GET","responseTime":"10ms"}
+    {httpMethod":"GET","responseTime":"10ms"}
 
 ### 发起GET/POST/PUT/DELETE请求
 -----------------------------------------
@@ -41,28 +41,28 @@
 - 能够携带自定义Header
 - path中的query会被合并到Query或者Body里
 
-```php
-$headers = array(
-    'X_API_UNITTEST1' => 'A',
-    'X_API_UNITTEST2' => 'B'
-);
 
-$params = array(
-	'param1' =>'C',
-	'param2' =>'D',
-);
+    $headers = array(
+        'X_API_UNITTEST1' => 'A',
+        'X_API_UNITTEST2' => 'B'
+    );
 
-// 如果有Oauth Token可以携带Token发起请求
-// $client->access_token = $token->access_token;
+    $params = array(
+        'param1' =>'C',
+        'param2' =>'D',
+    );
 
-$result['GET']      = $client->get('/test/test?param3=E&param4=F', $params, $headers);
-$result['POST']     = $client->post('/test/test?param3=E&param4=F', $params, $headers);
-$result['PUT']      = $client->put('/test/test?param3=E&param4=F', $params, $headers);
-$result['DELETE']   = $client->delete('/test/test?param3=E&param4=F', $params, $headers);
+    // 如果有Oauth Token可以携带Token发起请求
+    // $client->access_token = $token->access_token;
+
+    $result['GET']      = $client->get('/test/test?param3=E&param4=F', $params, $headers);
+    $result['POST']     = $client->post('/test/test?param3=E&param4=F', $params, $headers);
+    $result['PUT']      = $client->put('/test/test?param3=E&param4=F', $params, $headers);
+    $result['DELETE']   = $client->delete('/test/test?param3=E&param4=F', $params, $headers);
 
 
-print_r($result);
-```
+    print_r($result);
+
 
 返回：
 ```php
