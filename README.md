@@ -116,3 +116,55 @@
         [session_id] => npqsm6wxlobp745vqftzlu
     )
     
+验证Token
+
+    $token = $client->oauth($token);
+    
+验证成功，返回：
+
+    stdClass Object
+    (
+        [access_token] => ca7wpnk42p6eaelp42rezzof
+        [data] => stdClass Object
+            (
+                [@id] => test
+                [id] => 1
+                [name] => test
+                [passwd] => test
+            )
+        [expires_in] => 1425963121
+        [refresh_expires] => 1428551521
+        [refresh_token] => 4zwrrcdhsjn22ptf6dj5ynrxbqddtahj
+        [session_id] => npqsm6wxlobp745vqftzlu
+    )
+    
+刷新Token
+
+    $token = $client->refreshToken($token);
+返回：
+
+    stdClass Object
+    (
+        [access_token] => c4t6q5rh6fysu5v5ww5xenv4
+        [data] => stdClass Object
+            (
+                [@id] => test
+                [id] => 1
+                [name] => test
+                [passwd] => test
+            )
+        [expires_in] => 1425963155
+        [refresh_expires] => 1428551555
+        [refresh_token] => lqbjwmadkdbhxtz2jkbna4a3xaqsgfui
+        [session_id] => npqsm6wxlobp745vqftzlu
+    )
+
+
+
+退出登录 (需要在CGI环境下)
+
+    $client->logout();
+    
+返回
+
+    "session is remove"    
