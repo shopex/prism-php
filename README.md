@@ -82,6 +82,6 @@ Array
 可以通过：
 
     $client->requester = 'socket';
-    
+和
     $client->requester = 'curl';
 来选择使用哪种http底层方法。    
