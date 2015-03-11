@@ -80,6 +80,7 @@ Array
 ```
 
 可以通过：
+
     $client->requester = 'socket';
     
     $client->requester = 'curl';
