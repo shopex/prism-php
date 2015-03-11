@@ -17,18 +17,17 @@
 
 ### 创建Prism Client实例对象
 ---
-```php
-require_once('lib/Prism.php');
 
-$client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
-```
+    require_once('lib/Prism.php');
+
+    $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+
 
 ### 发起一个请求
 ---
-```php
-echo $client->get('/test/test');
-```
-返回: {"httpMethod":"GET","responseTime":"10ms"}
+    echo $client->get('/test/test');
+返回: 
+    "{httpMethod":"GET","responseTime":"10ms"}
 
 ### 发起GET/POST/PUT/DELETE请求
 ---
@@ -83,5 +82,7 @@ Array
 
     $client->requester = 'socket';
 和
+
     $client->requester = 'curl';
+    
 来选择使用哪种http底层方法。    
