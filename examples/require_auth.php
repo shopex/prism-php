@@ -6,7 +6,8 @@ $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $
 
 echo '<pre>';
 // 跳转到登录页面获取Token (需要在CGI环境下)
-$token = $client->oauth();
+//$token = $client->oauth();
+$token = $client->oauth('http://www.baidu.com');
 //print_r($token);
 /*
 返回：

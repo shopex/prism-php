@@ -80,8 +80,13 @@ class Oauth extends Requester {
         $params = array(
             'response_type' => 'code',
             'client_id' => 'pufy2a7d',
-            'redirect_uri' => 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],
         );    
+
+        if ($redirect)
+            $params['redirect_uri'] = $redirect;
+        else
+            $params['redirect_uri'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
         header('Location: ' . str_replace('/api', '', $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params));
         
     }

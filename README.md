@@ -124,7 +124,7 @@
     
 验证Token
 
-    $token = $client->checkSession($token);
+    $client->checkSession($token);
     
 验证成功，返回：
 
@@ -139,6 +139,7 @@
 刷新Token
 
     $token = $client->refreshToken($token);
+    
 返回：
 
     stdClass Object
