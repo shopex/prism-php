@@ -100,5 +100,3 @@ class CurlTest extends TestBase  {
     }
 
 }
-
-

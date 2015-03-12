@@ -79,6 +79,6 @@ print_r($token);
 
 
 // 如果有Toekn可以携带Token发起请求
-$client->access_token = $token->access_token;
+//$client->access_token = $token->access_token;
 echo $client->get('/test/test');
 // {"httpMethod":"GET","oauth":"%40id=test&id=1&name=test&passwd=test","responseTime":"10ms"}

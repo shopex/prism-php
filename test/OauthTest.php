@@ -19,8 +19,7 @@ require_once('../Oauth.php');
 */
 class OauthTest extends TestBase  {
 
-        /**
-    * @depends testCURL
+    /**
     *
     * oAuth单点登录
     * 功能

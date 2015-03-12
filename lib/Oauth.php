@@ -1,28 +1,56 @@
 <?php
-class Oauth {
+class Oauth extends Requester {
 
-    var $prism;
-    
-    function __construct ($prism) {
-        $this->prism = $prism;
+    /**
+    * OAUTH
+    */
+    public function oauth($redirect) {
+
+        // 已有Token的话检查Token是否过期
+//        if ($token) {
+//            $checkSessionResult = $this->oauth->checkSession($token);
+//            if ($checkSessionResult->error == null)  //Token存在
+//                return $token;
+//            else //Token不存在
+//                $this->oauth->goToAuthPage();
+//        }
+
+        // 跳转到验证页面 获取Token提取码(code)
+        if(!$_GET['code'])
+            $this->goToAuthPage();
+        // 提交code获取token
+        else
+            $token = $this->getToken($_GET['code']);
+
+        if ($token->access_token)
+            return $token;
+        else
+            $this->goToAuthPage();
+
     }
     
-    /* getToken
-    通过Token提取码(code)获取Token
+    /**
+    * getToken
+    * 通过Token提取码(code)获取Token
     */
-    function getToken($code) {
+    private function getToken($code) {
 
         $param = array(
-            'code'        =>$code,
-            'grant_type'  => 'authorization_code'
+            'code'       =>$code,
+            'grant_type' => 'authorization_code'
         );
         
-        $result = $this->prism->post('/oauth/token', $param);
+        $result = $this->createRequest('POST', 'oauth/token', $headers, $params);
+
+        print_r();die;
+
         return json_decode($result);
     
     }
-    /* refreshToken
-    通过refresh_token获取新的Token
+
+    /**
+    * refreshToken
+    * 通过refresh_token获取新的Token
     */
     function refreshToken($token) {
         
@@ -36,12 +64,13 @@ class Oauth {
         
     }
     
-    /* checkSession
-    验证token的session是否过期
-    {
-        "result": true,
-        "error": null
-    }
+    /**
+    * checkSession
+    * 验证token的session是否过期
+    * {
+    *    "result": true,
+    *    "error": null
+    * }
     */
     public function checkSession($token) {
         
@@ -54,8 +83,8 @@ class Oauth {
         
     }    
     
-    /*
-    跳转到验证页面
+    /**
+    * 跳转到验证页面
     */
     public function goToAuthPage() {
 
@@ -69,8 +98,8 @@ class Oauth {
         
     }
     
-    /*
-    退出登录
+    /**
+    * 退出登录
     */
     public function logout($redirect_uri = null) {
         
