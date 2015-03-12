@@ -7,21 +7,20 @@ class Requester {
     protected function createRequest ($http_method, $path, $headers = array(), $params = null) {
 
         // 获取完整URL信息
-        $url     = $this->base_url .'/'. ltrim($path, '/');
+        $url = $this->base_url .'/'. ltrim($path, '/');
 
-        if (strstr('oauth', $url))
-            $url = str_replace('api/', $url);
-
+        if (substr($path, 0, 6) == '/oauth')
+            $url = str_replace('/api', '', $url);
 
         $url_arr = parse_url($url);
 
 
         // 准备query, headers, postData
-        $query = array();
+        $query    = array();
         $postData = array();
-        if(isset($url_arr['query'])) {
+        if(isset($url_arr['query']))
             parse_str($url_arr['query'], $query);
-        }
+
 
         $headers['Pragma']        = 'no-cache';
         $headers['Cache-Control'] = 'no-cache';

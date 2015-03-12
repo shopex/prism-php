@@ -98,6 +98,10 @@
 
     $token = $client->oauth();
     
+    or
+    
+    $token = $client->oauth('http://www.xxx.com');
+    
 返回：
 
     stdClass Object
@@ -120,26 +124,16 @@
     
 验证Token
 
-    $token = $client->oauth($token);
+    $token = $client->checkSession($token);
     
 验证成功，返回：
 
     stdClass Object
     (
-        [access_token] => ca7wpnk42p6eaelp42rezzof
-        [data] => stdClass Object
-            (
-                [@id] => test
-                [id] => 1
-                [name] => test
-                [passwd] => test
-            )
-        [expires_in] => 1425963121
-        [refresh_expires] => 1428551521
-        [refresh_token] => 4zwrrcdhsjn22ptf6dj5ynrxbqddtahj
-        [session_id] => npqsm6wxlobp745vqftzlu
+        [result] => 1
+        [error] => 
     )
-    
+
 -----------------------------------------     
     
 刷新Token
@@ -168,6 +162,10 @@
 退出登录 (需要在CGI环境下)
 
     $client->logout();
+    
+    or
+    
+    $client->logout('http://www.xxx.com');
     
 返回：
 

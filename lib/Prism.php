@@ -6,8 +6,6 @@ require_once(__DIR__ . '/Curl.php');
 require_once(__DIR__ . '/Socket.php');
 require_once(__DIR__ . '/Sign.php');
 
-
-
 Class Prism extends Oauth {
 
     public $base_url; //platform地址
@@ -69,35 +67,5 @@ Class Prism extends Oauth {
     public function delete ($path, $params = null, $headers = null) {
         return $this->createRequest('DELETE', $path, $headers, $params);
     }
-    
-
-    
-    /*
-    刷新Token
-    */
-    public function refreshToken($token) {
         
-        if (!$this->client)
-            $this->client     = new Prism(str_replace('/api', '', $this->base_url), $this->app_key, $this->app_secret);
-        if (!$this->oauth)
-            $this->oauth      = new Oauth($this->client);
-        
-        return $this->oauth->refreshToken($token);
-    }
-    
-    /*
-    退出登录
-    */
-    public function logout ($redirect_uri = null) {
-        
-        if (!$this->client)
-            $this->client     = new Prism(str_replace('/api', '', $this->base_url), $this->app_key, $this->app_secret);
-        if (!$this->oauth)
-            $this->oauth      = new Oauth($this->client);        
-        
-        $this->oauth->logout($redirect_uri);
-    }
-    
 }
-
-

@@ -4,20 +4,11 @@ class Oauth extends Requester {
     /**
     * OAUTH
     */
-    public function oauth($redirect) {
-
-        // 已有Token的话检查Token是否过期
-//        if ($token) {
-//            $checkSessionResult = $this->oauth->checkSession($token);
-//            if ($checkSessionResult->error == null)  //Token存在
-//                return $token;
-//            else //Token不存在
-//                $this->oauth->goToAuthPage();
-//        }
+    public function oauth($redirect = null) {
 
         // 跳转到验证页面 获取Token提取码(code)
-        if(!$_GET['code'])
-            $this->goToAuthPage();
+        if(@!$_GET['code'])
+            $this->goToAuthPage($redirect);
         // 提交code获取token
         else
             $token = $this->getToken($_GET['code']);
@@ -25,7 +16,7 @@ class Oauth extends Requester {
         if ($token->access_token)
             return $token;
         else
-            $this->goToAuthPage();
+            $this->goToAuthPage($redirect);
 
     }
     
@@ -35,14 +26,12 @@ class Oauth extends Requester {
     */
     private function getToken($code) {
 
-        $param = array(
+        $params = array(
             'code'       =>$code,
             'grant_type' => 'authorization_code'
         );
         
-        $result = $this->createRequest('POST', 'oauth/token', $headers, $params);
-
-        print_r();die;
+        $result = $this->createRequest('POST', '/oauth/token', '', $params);
 
         return json_decode($result);
     
@@ -54,12 +43,12 @@ class Oauth extends Requester {
     */
     function refreshToken($token) {
         
-        $param = array(
+        $params = array(
             'refresh_token' => $token->refresh_token,
             'grant_type'    => 'refresh_token'
         );
         
-        $result = $this->prism->post('/oauth/token', $param);
+        $result = $this->createRequest('POST', '/oauth/token', '', $params);
         return json_decode($result);
         
     }
@@ -74,11 +63,11 @@ class Oauth extends Requester {
     */
     public function checkSession($token) {
         
-        $param = array(
+        $params = array(
             'session_id'=>$token->session_id
         );
         
-        $result = $this->prism->post('/api/platform/oauth/session_check', $param);
+        $result = $this->createRequest('POST', '/platform/oauth/session_check', '', $params);
         return json_decode($result);
         
     }    
@@ -86,15 +75,14 @@ class Oauth extends Requester {
     /**
     * 跳转到验证页面
     */
-    public function goToAuthPage() {
+    public function goToAuthPage($redirect = null) {
 
         $params = array(
             'response_type' => 'code',
             'client_id' => 'pufy2a7d',
             'redirect_uri' => 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],
         );    
-        
-        header('Location: ' . $this->prism->base_url . '/oauth/authorize'.'?'.http_build_query($params));
+        header('Location: ' . str_replace('/api', '', $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params));
         
     }
     
@@ -107,9 +95,9 @@ class Oauth extends Requester {
             $params = array(
                 'redirect_uri' => $redirect_uri,
             );   
-            header("Location: ". $this->prism->base_url . '/oauth/logout' . '?' . http_build_query($params));
+            header("Location: ". str_replace('/api', '', $this->base_url) . '/oauth/logout' . '?' . http_build_query($params));
         } else {
-            header("Location: ". $this->prism->base_url . '/oauth/logout');
+            header("Location: ". str_replace('/api', '', $this->base_url). '/oauth/logout');
         }
         
     }
