@@ -110,20 +110,6 @@ Class Prism {
     }
     
     /**** OAUTH ****
-    TOKEN示例:   
-    {
-        "access_token": "cypae4opudqi57etvv6xacnf",
-        "data": {
-            "@id": "test",
-            "id": "1",
-            "name": "test",
-            "passwd": "test"
-        },
-        "expires_in": 1425462389,
-        "refresh_expires": 1428050789,
-        "refresh_token": "7fuihf4nhz232omabkm6c22jcqvd5cmo",
-        "session_id": "qviznek5yzfuth2ev7ctph"
-    }
     */
     public function oauth($token = null) {
         

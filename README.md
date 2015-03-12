@@ -30,7 +30,7 @@
     echo $client->get('/test/test');
 返回: 
 
-    {httpMethod":"GET","responseTime":"10ms"}
+    {”httpMethod":"GET","responseTime":"10ms"}
 
 ### 发起GET/POST/PUT/DELETE请求
 -----------------------------------------

@@ -11,13 +11,13 @@ parse_str(file_get_contents('php://input'), $data);
 
 $result['httpMethod']           = $_SERVER['REQUEST_METHOD'];
 
-if (@$_SERVER['HTTP_X_API_OAUTH'])       
+if (@$_SERVER['HTTP_X_API_OAUTH'])
     $result['oauth']            = $_SERVER['HTTP_X_API_OAUTH'];
-if (@$_SERVER['HTTP_X_API_UNITTEST1'])       
+if (@$_SERVER['HTTP_X_API_UNITTEST1'])
     $result['header1']          = $_SERVER['HTTP_X_API_UNITTEST1'];
-if (@$_SERVER['HTTP_X_API_UNITTEST2'])       
+if (@$_SERVER['HTTP_X_API_UNITTEST2'])
     $result['header2']          = $_SERVER['HTTP_X_API_UNITTEST2'];
-if (@$_GET)                             
+if (@$_GET)
     $result['query']            = $_GET;
 if (@$data)
     $result['data']             = $data;
