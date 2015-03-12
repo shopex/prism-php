@@ -17,7 +17,7 @@ require_once(__DIR__ . '/TestBase.php');
     能够携带自定义Header
     path中的query会被合并到Query或者Body里
 */
-class CurlTest extends TestBase  {
+class SocketTest extends TestBase  {
 
     function __construct () {
         $this->client = new Prism($this->url, $this->client_id, $this->secret);
