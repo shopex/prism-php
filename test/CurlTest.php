@@ -22,7 +22,7 @@ class CurlTest extends TestBase  {
     function __construct () {
         $this->client = new Prism($this->url, $this->client_id, $this->secret);
         $this->client->access_token = 'cypae4opudqi57etvv6xacnf';
-        $client->setRequester('curl');
+        $this->client->setRequester('curl');
     }
 
     public function testGET() {

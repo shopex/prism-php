@@ -41,7 +41,7 @@ class Curl {
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($postData));
         }
 
-        // 运行cURL，请求网页
+        // 运行cURL，发起请求
         $data = curl_exec($curl);
 
         // 关闭URL请求

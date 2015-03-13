@@ -68,9 +68,9 @@ class Socket {
         }
 
         if ($postData)
-            $head_arr[] = 'Content-length: ' . strlen(http_build_query($postData));
+            $head_arr[] = 'Content-Length: ' . strlen(http_build_query($postData));
 
-        $head_arr[] = "Connection: Close\r\n\r\n";
+        $head_arr[] = "Connection: Keep-Alive\r\n\r\n";
 
         return implode($head_arr, "\r\n");
 

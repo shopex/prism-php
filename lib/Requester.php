@@ -41,7 +41,8 @@ class Requester {
             break;
 
             default:
-                $query = $params;
+                if (is_array($params))
+                    $query = array_merge($query, $params);
 
         }
 
