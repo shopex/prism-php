@@ -72,6 +72,9 @@ class Requester {
 
     }
 
+    /**
+    * 备用http方法
+    */
     public function fileGetContents($http_method = 'GET', $url, $headers, $postData = null) {
 
         $opts = array(

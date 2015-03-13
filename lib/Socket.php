@@ -44,6 +44,7 @@ class Socket {
         // 获取结果
         $result = '';
         while (!feof($fp)) {
+            // 检查有没有超时
             if ( $this->check_time_out($fp) )
                 return "{'error':'socket read timeout.'}";
 
