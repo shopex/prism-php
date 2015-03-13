@@ -1,5 +1,4 @@
 <?php
-// todo: timeout, chunked
 class Socket {
 
     public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
