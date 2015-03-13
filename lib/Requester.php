@@ -69,7 +69,6 @@ class Requester {
 
         // 发起请求 CURL/SOCKET
         return $this->http->sendRequest($http_method, $final_url, $headers, $postData);
-//        return $http->fileGetContents($http_method, $final_url, $headers, $postData);
 
     }
 
