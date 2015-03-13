@@ -94,7 +94,7 @@
 ### Oauth
 -----------------------------------------
 
-跳转到登录页面获取Token (需要在CGI环境下)
+__跳转到登录页面获取Token (需要在CGI环境下)__
 
     $token = $client->oauth();
     
@@ -122,7 +122,7 @@
     
 -----------------------------------------    
     
-验证Token
+__验证Token__
 
     $client->checkSession($token);
     
@@ -136,7 +136,7 @@
 
 -----------------------------------------     
     
-刷新Token
+__刷新Token__
 
     $token = $client->refreshToken($token);
     
@@ -160,7 +160,7 @@
 
 ----------------------------------------- 
 
-退出登录 (需要在CGI环境下)
+__退出登录 (需要在CGI环境下)__
 
     $client->logout();
     
@@ -174,7 +174,7 @@
     
 -----------------------------------------     
     
-携带Token访问API
+__携带Token访问API__
 
     $client->access_token = $token->access_token;
     echo $client->get('/test/test');
