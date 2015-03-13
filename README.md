@@ -83,10 +83,10 @@
 
 可以通过：
 
-    $client->requester = 'socket';
+    $client->setRequester('socket');
 和
 
-    $client->requester = 'curl';
+    $client->setRequester('curl');
     
 来选择使用哪种http底层方法。(在CURL开启的情况下会自动优先启用CURL连接)  
 

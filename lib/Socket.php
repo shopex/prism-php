@@ -52,7 +52,6 @@ class Socket {
         list($responseHead, $responseBody) = preg_split("/\r\n\r\n/", $result);
 
         $responseHead = $this->parse_http_header($responseHead);
-        print_r($responseHead);
 
         return $responseBody;
     }
@@ -62,6 +61,7 @@ class Socket {
         $head_arr = array();
         $head_arr[] = "{$http_method} {$path}?{$query} HTTP/1.1";
         $head_arr[] = "Host: {$host}";
+        $head_arr[] = "User-Agent: PrismSDK/PHP";
 
         foreach($headers as $key=>$value) {
             $head_arr[] = "$key: $value";
@@ -77,6 +77,7 @@ class Socket {
     }
 
     function parse_http_header($str) {
+
         $lines = explode("\r\n", $str);
         $head  = array(array_shift($lines));
         foreach ($lines as $line) {
@@ -88,6 +89,7 @@ class Socket {
             }
         }
         return $head;
+
     }
 
 }
