@@ -49,9 +49,10 @@ class Socket {
         fclose($fp);
 
         // 解析结果
-        $result       = preg_split("/\r\n\r\n/", $result);
-        $responseHead = $result[0];
-        $responseBody = $result[1];
+        list($responseHead, $responseBody) = preg_split("/\r\n\r\n/", $result);
+
+        $responseHead = $this->parse_http_header($responseHead);
+        print_r($responseHead);
 
         return $responseBody;
     }
@@ -73,6 +74,20 @@ class Socket {
 
         return implode($head_arr, "\r\n");
 
+    }
+
+    function parse_http_header($str) {
+        $lines = explode("\r\n", $str);
+        $head  = array(array_shift($lines));
+        foreach ($lines as $line) {
+            list($key, $val) = explode(':', $line, 2);
+            if ($key == 'Set-Cookie') {
+                $head['Set-Cookie'][] = trim($val);
+            } else {
+                $head[$key] = trim($val);
+            }
+        }
+        return $head;
     }
 
 }

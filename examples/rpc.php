@@ -13,8 +13,8 @@ $params = array(
 	'param2' =>'D',
 );
 
-$client->requester = 'socket';
-//$client->requester = 'curl';
+$client->setRequester('socket');
+$client->setRequester('curl');
 
 $result = array();
 

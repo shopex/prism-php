@@ -22,7 +22,7 @@ class SocketTest extends TestBase  {
     function __construct () {
         $this->client = new Prism($this->url, $this->client_id, $this->secret);
         $this->client->access_token = 'cypae4opudqi57etvv6xacnf';
-        $this->client->requester = 'socket';
+        $this->client->setRequester('socket');
     }
 
     public function testGET() {

@@ -100,7 +100,7 @@
     
     or
     
-    $token = $client->oauth('http://www.xxx.com');
+    $token = $client->oauth($redirect = 'http://www.xxx.com');
     
 返回：
 
@@ -166,7 +166,7 @@
     
     or
     
-    $client->logout('http://www.xxx.com');
+    $client->logout($redirect = 'http://www.xxx.com');
     
 返回：
 

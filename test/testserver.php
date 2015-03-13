@@ -25,5 +25,7 @@ if (@$data)
 $result['responseTime']         = $time_taken;
 
 
+//header("Transfer-encoding: chunked");
+
 echo json_encode($result) . "\n";
 //var_dump($_SERVER);

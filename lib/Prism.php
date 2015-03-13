@@ -13,7 +13,6 @@ Class Prism extends Oauth {
     public $app_secret; // secret
 
     public $access_token; // access_token
-    public $requester; // http包选择
     public $http; // http包
     
     public $client; //prism对象
@@ -25,19 +24,22 @@ Class Prism extends Oauth {
         $this->app_key    = $app_key;
         $this->app_secret = $app_secret;
         
-        if (!$this->http) {
-            if (extension_loaded('curl'))
-                $this->http = new Curl();
-            else
-                $this->http = new Socket();
+        if (extension_loaded('curl'))
+            $this->http = new Curl();
+        else
+            $this->http = new Socket();
 
-            if ($this->requester && $this->requester == 'curl')
-                $this->http = new Curl();
+    }
 
-            if ($this->requester && $this->requester == 'socket')
-                $this->http = new Socket();
-        }
-        
+    /**
+    * 设置HTTP包的类型
+    */
+    public function setRequester($string) {
+        if ($string == 'curl')
+            $this->http = new Curl();
+
+        if ($string == 'socket')
+            $this->http = new Socket();
     }
     
     /**
