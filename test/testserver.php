@@ -3,7 +3,7 @@
 //$time_start = microtime(true);
 $time_start = $_SERVER['REQUEST_TIME_FLOAT'];
 usleep(10*1000);
-//sleep(5);
+sleep(5);
 $time_end = microtime(true) - $time_start;
 $time_taken = round($time_end, 3)*1000 . "ms";
 
