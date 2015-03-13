@@ -27,8 +27,11 @@ class Socket {
         // 新建Socket资源
         $fp = fsockopen($scheme . $ip, $port, $errno, $errstr, 30);
 
+        if ( function_exists('stream_set_timeout') )
+            stream_set_timeout($fp, 30);
+
         if (!$fp)
-            return "$errstr ($errno)\n";
+            return "{'error':'$errstr.'}";
 
 
         // 发起请求
@@ -39,10 +42,12 @@ class Socket {
 
         fwrite($fp, $request);
 
-
         // 获取结果
         $result = '';
         while (!feof($fp)) {
+            if ( $this->check_time_out($fp) )
+                return "{'error':'socket read timeout.'}";
+
             $result .= fgets($fp, 128);
         }
 
@@ -58,7 +63,7 @@ class Socket {
 
     private function build_head($http_method, $path, $query, $host, $headers, $postData = null) {
 
-        $head_arr = array();
+        $head_arr   = array();
         $head_arr[] = "{$http_method} {$path}?{$query} HTTP/1.1";
         $head_arr[] = "Host: {$host}";
         $head_arr[] = "User-Agent: PrismSDK/PHP";
@@ -70,13 +75,13 @@ class Socket {
         if ($postData)
             $head_arr[] = 'Content-Length: ' . strlen(http_build_query($postData));
 
-        $head_arr[] = "Connection: Keep-Alive\r\n\r\n";
+        $head_arr[] = "Connection: close\r\n\r\n";
 
         return implode($head_arr, "\r\n");
 
     }
 
-    function parse_http_header($str) {
+    private function parse_http_header($str) {
 
         $lines = explode("\r\n", $str);
         $head  = array(array_shift($lines));
@@ -89,6 +94,16 @@ class Socket {
             }
         }
         return $head;
+
+    }
+
+    private function check_time_out($fp) {
+
+        if ( !function_exists('stream_get_meta_data') )
+            return false;
+
+        $status = stream_get_meta_data($fp);
+        return $status['timed_out'];
 
     }
 
