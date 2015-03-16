@@ -24,7 +24,7 @@ class Oauth extends Requester {
     * getToken
     * 通过Token提取码(code)获取Token
     */
-    private function getToken($code) {
+    public function getToken($code) {
 
         $params = array(
             'code'       =>$code,
