@@ -1,14 +1,15 @@
 <?php
+require_once(__DIR__.'/../lib/Prism.php');
 
-require_once('../lib/Prism.php');
-
-$client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+//$client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+$client = new Prism($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
 echo '<pre>';
 // 跳转到登录页面获取Token (需要在CGI环境下)
-//$token = $client->oauth();
-$token = $client->oauth('http://www.baidu.com');
+$token = $client->oauth();
+//$token = $client->oauth('http://www.baidu.com');
 //print_r($token);
+
 /*
 返回：
 stdClass Object
@@ -32,28 +33,19 @@ stdClass Object
 // 验证Token
 //$check_session_result = $client->checkSession($token);
 //print_r($check_session_result);
-/*
 
+/*
 stdClass Object
 (
-    [access_token] => ca7wpnk42p6eaelp42rezzof
-    [data] => stdClass Object
-        (
-            [@id] => test
-            [id] => 1
-            [name] => test
-            [passwd] => test
-        )
-
-    [expires_in] => 1425963121
-    [refresh_expires] => 1428551521
-    [refresh_token] => 4zwrrcdhsjn22ptf6dj5ynrxbqddtahj
-    [session_id] => npqsm6wxlobp745vqftzlu
+    [result] => 1
+    [error] =>
 )
 */
 
+
 // 刷新Token
-//$token = $client->refreshToken($token);
+// $token = $client->refreshToken($token);
+
 /*
 stdClass Object
 (
@@ -72,6 +64,7 @@ stdClass Object
     [session_id] => npqsm6wxlobp745vqftzlu
 )
 */
+
 // 退出登录
 //$client->logout('http://www.baidu.com');
 //$client->logout();
@@ -82,6 +75,6 @@ print_r($token);
 
 
 // 如果有Toekn可以携带Token发起请求
-$client->access_token = $token->access_token;
+echo $client->access_token = $token->access_token;
 echo $client->get('/test/test');
 // {"httpMethod":"GET","oauth":"%40id=test&id=1&name=test&passwd=test","responseTime":"10ms"}
