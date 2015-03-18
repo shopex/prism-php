@@ -19,10 +19,10 @@ $client->setRequester('curl');
 
 $result = array();
 
-$result['GET']      = $client->get('/test/test?param3=E&param4=F', $params, $headers);
-$result['POST']     = $client->post('/test/test?param3=E&param4=F', $params, $headers);
-$result['PUT']      = $client->put('/test/test?param3=E&param4=F', $params, $headers);
-$result['DELETE']   = $client->delete('/test/test?param3=E&param4=F', $params, $headers);
+$result['GET']      = $client->get('/test/test', $params, $headers);
+$result['POST']     = $client->post('/test/test', $params, $headers);
+$result['PUT']      = $client->put('/test/test', $params, $headers);
+$result['DELETE']   = $client->delete('/test/test', $params, $headers);
 
 print_r($result);
 
