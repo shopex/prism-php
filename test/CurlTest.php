@@ -32,6 +32,7 @@ class CurlTest extends TestBase  {
         $r = json_decode($r);
 
         if (
+            $r &&
             $r->httpMethod == 'GET' &&
             $r->header1 == 'A' &&
             $r->header2 == 'B' &&
@@ -51,6 +52,7 @@ class CurlTest extends TestBase  {
         $r = json_decode($r);
 
         if (
+            $r &&
             $r->httpMethod == 'POST' &&
             $r->header1 == 'A' &&
             $r->header2 == 'B' &&
@@ -70,6 +72,7 @@ class CurlTest extends TestBase  {
         $r = json_decode($r);
 
         if (
+            $r &&
             $r->httpMethod == 'PUT' &&
             $r->header1 == 'A' &&
             $r->header2 == 'B' &&
@@ -88,6 +91,7 @@ class CurlTest extends TestBase  {
         $r = json_decode($r);
 
         if (
+            $r &&
             $r->httpMethod == 'DELETE' &&
             $r->header1 == 'A' &&
             $r->header2 == 'B' &&
