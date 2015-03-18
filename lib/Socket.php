@@ -24,14 +24,13 @@ class Socket {
 
 
         // 新建Socket资源
-        $fp = fsockopen($scheme . $ip, $port, $errno, $errstr, 30);
-
-        if ( function_exists('stream_set_timeout') )
-            stream_set_timeout($fp, 30);
+        $fp = @fsockopen($scheme . $ip, $port, $errno, $errstr, 30);
 
         if (!$fp)
             return "{'error':'$errstr.'}";
 
+        if ( function_exists('stream_set_timeout') )
+            stream_set_timeout($fp, 30);
 
         // 发起请求
         $request = $this->build_head($http_method, $path, $query, $host, $headers, $postData);
