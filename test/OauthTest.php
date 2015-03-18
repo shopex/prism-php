@@ -24,7 +24,7 @@ class OauthTest extends TestBase  {
         $token = $this->client->getToken($this->code);
         $token = $this->client->refreshToken($token);
 
-        if ($token->access_token)
+        if ($token && $token->access_token)
             $result = $this->client->checkSession($token);
 
         $this->assertEquals(1, $result->result);
