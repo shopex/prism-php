@@ -14,16 +14,16 @@ Class Prism extends Oauth {
 
     public $access_token; // access_token
     public $http; // http包
-    
+
     public $client; //prism对象
     public $oauth; //oauth对象
-    
+
     function __construct($base_url, $app_key, $app_secret) {
 
         $this->base_url   = rtrim($base_url, '/');
         $this->app_key    = $app_key;
         $this->app_secret = $app_secret;
-        
+
         if (extension_loaded('curl'))
             $this->http = new Curl();
         else
@@ -41,7 +41,7 @@ Class Prism extends Oauth {
         if ($string == 'socket')
             $this->http = new Socket();
     }
-    
+
     /**
     * GET
     */
@@ -69,5 +69,5 @@ Class Prism extends Oauth {
     public function delete ($path, $params = null, $headers = null) {
         return $this->createRequest('DELETE', $path, $headers, $params);
     }
-        
+
 }

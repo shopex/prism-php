@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/TestBase.php');
-require_once(__DIR__ . '/../lib/Sign.php');
+require_once(__DIR__ . '/../src/Sign.php');
 
 /**
 * Sign数字签名

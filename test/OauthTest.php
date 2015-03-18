@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/TestBase.php');
-require_once(__DIR__ . '/../lib/Prism.php');
+require_once(__DIR__ . '/../src/Prism.php');
 
 /**
 *

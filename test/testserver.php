@@ -44,6 +44,8 @@ function api() {
         $result['oauth']            = $_SERVER['HTTP_AUTHORIZATION'];
     if (@$_SERVER['HTTP_X_API_OAUTH'])
         $result['oauth']            = $_SERVER['HTTP_X_API_OAUTH'];
+    if (@$_SERVER['HTTP_X_REQUEST_ID'])
+        $result['requestId']            = $_SERVER['HTTP_X_REQUEST_ID'];
     if (@$_SERVER['HTTP_X_API_UNITTEST1'])
         $result['header1']          = $_SERVER['HTTP_X_API_UNITTEST1'];
     if (@$_SERVER['HTTP_X_API_UNITTEST2'])

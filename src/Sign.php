@@ -1,6 +1,6 @@
 <?php
 class Sign {
-    
+
     //Method        = GET | POST | DELETE | PUT ...
     //Path          = /path/to/method
     //headers       = urnencode(HeaderKey1 + HeaderValue1 + HeaderKey1 + HeaderValue1 ...)
@@ -44,7 +44,7 @@ class Sign {
             $result = array();
             foreach($params as $key=>$value){
                 if (null == $value) {
-                   $value = ''; 
+                   $value = '';
                 }
                 $result[] = $key.'='.$value;
             }

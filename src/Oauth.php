@@ -19,7 +19,7 @@ class Oauth extends Requester {
             $this->goToAuthPage($redirect);
 
     }
-    
+
     /**
     * getToken
     * 通过Token提取码(code)获取Token
@@ -30,11 +30,11 @@ class Oauth extends Requester {
             'code'       =>$code,
             'grant_type' => 'authorization_code'
         );
-        
+
         $result = $this->createRequest('POST', '/oauth/token', '', $params);
 
         return json_decode($result);
-    
+
     }
 
     /**
@@ -42,17 +42,17 @@ class Oauth extends Requester {
     * 通过refresh_token获取新的Token
     */
     function refreshToken($token) {
-        
+
         $params = array(
             'refresh_token' => $token->refresh_token,
             'grant_type'    => 'refresh_token'
         );
-        
+
         $result = $this->createRequest('POST', '/oauth/token', '', $params);
         return json_decode($result);
-        
+
     }
-    
+
     /**
     * checkSession
     * 验证token的session是否过期
@@ -62,16 +62,16 @@ class Oauth extends Requester {
     * }
     */
     public function checkSession($token) {
-        
+
         $params = array(
             'session_id'=>$token->session_id
         );
-        
+
         $result = $this->createRequest('POST', '/platform/oauth/session_check', '', $params);
         return json_decode($result);
-        
-    }    
-    
+
+    }
+
     /**
     * 跳转到验证页面
     */
@@ -80,7 +80,7 @@ class Oauth extends Requester {
         $params = array(
             'response_type' => 'code',
             'client_id' => 'pufy2a7d',
-        );    
+        );
 
         if ($redirect)
             $params['redirect_uri'] = $redirect;
@@ -88,23 +88,23 @@ class Oauth extends Requester {
             $params['redirect_uri'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
         header('Location: ' . str_replace('/api', '', $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params));
-        
+
     }
-    
+
     /**
     * 退出登录
     */
     public function logout($redirect_uri = null) {
-        
+
         if ($redirect_uri) {
             $params = array(
                 'redirect_uri' => $redirect_uri,
-            );   
+            );
             header("Location: ". str_replace('/api', '', $this->base_url) . '/oauth/logout' . '?' . http_build_query($params));
         } else {
             header("Location: ". str_replace('/api', '', $this->base_url). '/oauth/logout');
         }
-        
+
     }
 
 }
