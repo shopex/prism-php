@@ -41,7 +41,22 @@ class Socket {
         fwrite($fp, $request);
 
         // 获取结果
-        $result = '';
+        $result                 = '';
+        $response               = array();
+        $response['Line']       = '';
+        $response['Header']     = '';
+        $response['Body']       = '';
+        $response['StatusCode'] = '';
+
+
+        $response['Line'] = fgets($fp, 128);
+
+        if(preg_match('/\d{3}/', $response['Line'], $match))
+            $response['StatusCode'] = $match[0];
+
+        if($response['StatusCode'] = 101)
+            return $fp;
+
         while (!feof($fp)) {
             // 检查有没有超时
             if ( $this->check_time_out($fp) )
@@ -54,11 +69,11 @@ class Socket {
         fclose($fp);
 
         // 解析结果
-        list($responseHead, $responseBody) = preg_split("/\r\n\r\n/", $result);
+        list($response['Header'], $response['Body']) = preg_split("/\r\n\r\n/", $result);
 
-        $responseHead = $this->parse_http_header($responseHead);
+        $response['Header'] = $this->parse_http_header($response['Header']);
 
-        return $responseBody;
+        return $response['Body'];
     }
 
     private function build_head($http_method, $path, $query, $host, $headers, $postData = null) {
