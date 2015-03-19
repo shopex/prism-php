@@ -1,12 +1,13 @@
 <?php
 require_once(__DIR__ . '/Requester.php');
 require_once(__DIR__ . '/Oauth.php');
+require_once(__DIR__ . '/Notify.php');
 
 require_once(__DIR__ . '/Curl.php');
 require_once(__DIR__ . '/Socket.php');
 require_once(__DIR__ . '/Sign.php');
 
-Class Prism extends Oauth {
+Class Prism extends Notify {
 
     public $base_url; //platform地址
     public $app_key; // key
