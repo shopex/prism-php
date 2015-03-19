@@ -35,4 +35,4 @@
 
 
 -----------------------------------------
-[详细文档](git.ishopex.cn/prism-sdk/prism-php/wikis/home)
+[详细文档](https://git.ishopex.cn/prism-sdk/prism-php/wikis/home)
