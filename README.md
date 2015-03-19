@@ -1,184 +1,38 @@
-# Prsim PHP SDK
-========================================
+# 快速开始
 
-## 用途
-
-实现Shopex Prism 的PHP版SDK供第三方使用
-
-## 功能
-
-- 提供HTTP API调用（GET/POST/PUT/DELETE方式）
-- 提供Oauth认证
-- (连接Websocket，可以发布/消费/应答消息)
-
-
-## 用法
-
-
-### 创建Prism Client实例对象
+## 创建Prism Client实例对象
 -----------------------------------------
 
-    require_once('lib/Prism.php');
+首先我们要引用PHP Prism SDK
+
+    require_once(__DIR__ . '/src/Prism.php');
+
+和大部分的剧情一样，所有的故事都是从搞对象开始的：
 
     $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
+我们需要把我们的三大件上交给我们的新对象：
+- url: 我们测试平台的地址(会先连接到Prism再到你提交的API服务上获取运行结果)。
+  - 如果只是在本地测试，可以用http://127.0.0.1:8000 (需要自己开启的API服务)。
+  - 如果使用HTTPS加密方法，请注意你的url应该是类似https://192.168.51.50:443的格式。
+- key: 也叫cliend_id，在平台上注册你的API时会提供给你。
+- secret: 密匙，在平台上注册你的API时会提供给你。
 
-### 发起一个请求
+
+## 发起一个请求
 -----------------------------------------
+
 发起GET请求：
 
     echo $client->get('/test/test');
+
 返回: 
 
     {"httpMethod":"GET","responseTime":"10ms"}
 
-### 发起GET/POST/PUT/DELETE请求
+
+注：具体的返回结果和API的具体实现有关，都会以JSON格式返回结果。
+
+
 -----------------------------------------
-
-*注意*：
-- GET方法参数通过Query传递
-- POST方法参数通过Body传递
-- PUT方法参数通过Body传递
-- DELETE方法参数通过Query传递
-- 能够携带自定义Header
-- path中的query会被合并到Query或者Body里
-
-```php
-    $headers = array(
-        'X_API_UNITTEST1' => 'A',
-        'X_API_UNITTEST2' => 'B'
-    );
-
-    $params = array(
-        'param1' =>'C',
-        'param2' =>'D',
-    );
-
-    $result['GET']      = $client->get('/test/test?param3=E&param4=F', $params, $headers);
-    $result['POST']     = $client->post('/test/test?param3=E&param4=F', $params, $headers);
-    $result['PUT']      = $client->put('/test/test?param3=E&param4=F', $params, $headers);
-    $result['DELETE']   = $client->delete('/test/test?param3=E&param4=F', $params, $headers);
-
-
-    print_r($result);
-```
-
-返回：
-```php
-    Array                                                                                                                                                   
-    (                                                                                                                                                       
-        [GET] => {"httpMethod":"GET","header1":"A","header2":"B","query":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}       
-
-        [POST] => {"httpMethod":"POST","header1":"A","header2":"B","data":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}      
-
-        [PUT] => {"httpMethod":"PUT","header1":"A","header2":"B","data":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"}        
-
-        [DELETE] => {"httpMethod":"DELETE","header1":"A","header2":"B","query":{"param1":"C","param2":"D","param3":"E","param4":"F"},"responseTime":"10ms"} 
-
-    )                                                                                                                                                       
-```
-
-### CURL和Socket连接
------------------------------------------
-
-可以通过：
-
-    $client->setRequester('socket');
-和
-
-    $client->setRequester('curl');
-    
-来选择使用哪种http底层方法。(在CURL开启的情况下会自动优先启用CURL连接)  
-
-
-### Oauth
------------------------------------------
-
-__跳转到登录页面获取Token (需要在CGI环境下)__
-
-    $token = $client->oauth();
-    
-    or
-    
-    $token = $client->oauth($redirect = 'http://www.xxx.com');
-    
-返回：
-
-    stdClass Object
-    (
-        [access_token] => nkmabee4wxmhgjsqbeo2eg4g
-        [data] => stdClass Object
-            (
-                [@id] => test
-                [id] => 1
-                [name] => test
-                [passwd] => test
-            )
-        [expires_in] => 1425962899
-        [refresh_expires] => 1428551299
-        [refresh_token] => iaysxo7zyiwnk743uyyzaa7w3ee4nrea
-        [session_id] => npqsm6wxlobp745vqftzlu
-    )
-    
------------------------------------------    
-    
-__验证Token__
-
-    $client->checkSession($token);
-    
-验证成功，返回：
-
-    stdClass Object
-    (
-        [result] => 1
-        [error] => 
-    )
-
------------------------------------------     
-    
-__刷新Token__
-
-    $token = $client->refreshToken($token);
-    
-返回：
-
-    stdClass Object
-    (
-        [access_token] => c4t6q5rh6fysu5v5ww5xenv4
-        [data] => stdClass Object
-            (
-                [@id] => test
-                [id] => 1
-                [name] => test
-                [passwd] => test
-            )
-        [expires_in] => 1425963155
-        [refresh_expires] => 1428551555
-        [refresh_token] => lqbjwmadkdbhxtz2jkbna4a3xaqsgfui
-        [session_id] => npqsm6wxlobp745vqftzlu
-    )
-
------------------------------------------ 
-
-__退出登录 (需要在CGI环境下)__
-
-    $client->logout();
-    
-    or
-    
-    $client->logout($redirect = 'http://www.xxx.com');
-    
-返回：
-
-    "session is remove"    
-    
------------------------------------------     
-    
-__携带Token访问API__
-
-    $client->access_token = $token->access_token;
-    echo $client->get('/test/test');
-
-返回：
-
-    {"httpMethod":"GET","oauth":"%40id=test&id=1&name=test&passwd=test","responseTime":"10ms"}    
+[详细文档](home)
