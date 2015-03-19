@@ -47,7 +47,8 @@ class Socket {
             if ( $this->check_time_out($fp) )
                 return "{'error':'socket read timeout.'}";
 
-            $result .= fgets($fp, 128);
+            $buffer = fgets($fp, 128);
+            $result .= $buffer;
         }
 
         fclose($fp);
@@ -74,7 +75,10 @@ class Socket {
         if ($postData)
             $head_arr[] = 'Content-Length: ' . strlen(http_build_query($postData));
 
-        $head_arr[] = "Connection: close\r\n\r\n";
+        if (!$headers['Connection'])
+            $head_arr[] = "Connection: close";
+
+        $head_arr[] =  "\r\n";
 
         return implode($head_arr, "\r\n");
 
