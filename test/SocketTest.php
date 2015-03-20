@@ -42,6 +42,7 @@ class SocketTest extends TestBase  {
         $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
         $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
         $this->assertEquals(count($this->params), count((array)$r->query));
+        $this->assertTrue( is_string($r->oauth) );
 
     }
 
@@ -58,6 +59,7 @@ class SocketTest extends TestBase  {
         $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
         $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
         $this->assertEquals(count($this->params), count((array)$r->data));
+        $this->assertTrue( is_string($r->oauth) );
 
     }
 
@@ -74,6 +76,7 @@ class SocketTest extends TestBase  {
         $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
         $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
         $this->assertEquals(count($this->params), count((array)$r->data));
+        $this->assertTrue( is_string($r->oauth) );
 
     }
 
@@ -90,6 +93,7 @@ class SocketTest extends TestBase  {
         $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
         $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
         $this->assertEquals(count($this->params), count((array)$r->query));
+        $this->assertTrue( is_string($r->oauth) );
 
     }
 
