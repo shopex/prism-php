@@ -27,7 +27,7 @@ class Socket {
         $fp = @fsockopen($scheme . $ip, $port, $errno, $errstr, 30);
 
         if (!$fp)
-            return "{'error':'$errstr.'}";
+            throw new Exception($errstr);
 
         if ( function_exists('stream_set_timeout') )
             stream_set_timeout($fp, 30);
@@ -54,13 +54,13 @@ class Socket {
         if(preg_match('/\d{3}/', $response['Line'], $match))
             $response['StatusCode'] = $match[0];
 
-        if($response['StatusCode'] = 101)
+        if($response['StatusCode'] == 101) // websocket，直接返回stream
             return $fp;
 
         while (!feof($fp)) {
-            // 检查有没有超时
-            if ( $this->check_time_out($fp) )
-                return "{'error':'socket read timeout.'}";
+
+            if ( $this->check_time_out($fp) ) // 检查有没有超时
+                throw new Exception('Socket read timeout.');
 
             $buffer = fgets($fp, 128);
             $result .= $buffer;
@@ -90,7 +90,7 @@ class Socket {
         if ($postData)
             $head_arr[] = 'Content-Length: ' . strlen(http_build_query($postData));
 
-        if (!$headers['Connection'])
+        if ( !isset($headers['Connection']) )
             $head_arr[] = "Connection: close";
 
         $head_arr[] =  "\r\n";
