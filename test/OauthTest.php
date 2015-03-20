@@ -6,7 +6,7 @@ require_once(__DIR__ . '/TestBase.php');
 * oAuth单点登录
 * 功能
 * getToken 获取令牌
-* refresh-token 刷新令牌
+* refreshToken 刷新令牌
 * checkSession 验证令牌
 */
 class OauthTest extends TestBase  {
