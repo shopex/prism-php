@@ -46,7 +46,7 @@ class Curl {
 
         // 遇到错误
         if ( curl_errno($curl) )
-            return "{'error':'".curl_error($curl)."'}";
+            throw new Exception( curl_error($curl) );
 
         // 关闭URL请求
         curl_close($curl);
