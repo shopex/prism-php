@@ -20,14 +20,7 @@ class CurlTest extends TestBase  {
 
     function setUp() {
 
-        $this->assertTrue( is_string($this->local_url) );
-        $this->assertTrue( is_string($this->client_id) );
-        $this->assertTrue( is_string($this->secret) );
-
         $this->client = new Prism($this->local_url, $this->client_id, $this->secret);
-
-        $this->assertTrue( is_object($this->client) );
-
         $this->client->access_token = 'cypae4opudqi57etvv6xacnf';
         $this->client->setRequester('curl');
 
