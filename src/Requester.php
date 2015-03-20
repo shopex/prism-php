@@ -9,7 +9,7 @@ class Requester {
         // 获取完整URL信息
         $url = $this->base_url .'/'. ltrim($path, '/');
 
-        if (substr($path, 0, 6) == '/oauth')
+        if (substr($path, 0, 6) == '/oauth') // oauth url fix
             $url = str_replace('/api', '', $url);
 
         $url_arr = parse_url($url);
