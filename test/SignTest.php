@@ -14,26 +14,27 @@ require_once(__DIR__ . '/../src/Sign.php');
 class CurlTest extends TestBase  {
 
     public function testSign() {
+
+        $method = 'GET';
+        $path   = '/api/test/test';
         $headers = array(
             'X_API_UNITTEST1' => 'A',
             'X_API_UNITTEST2' => 'B'
         );
-
-        $params1 = array(
+        $query = array(
             'param1' =>'C',
             'param2' =>'D',
         );
-
-        $params2 = array(
+        $postData = array(
             'param1' =>'E',
             'param2' =>'F',
         );
+        $secret = $this->secret;
 
-        $signResult = 'signResult:ERROR';
-        $r = Sign::produce('GET', '/api/test/test', $headers, $params1, $params2, $this->secret);
-        if ($r)
-            $signResult = 'signResult:OK';
-        $this->assertEquals('signResult:OK', $signResult);
+        $r = Sign::produce($method, $path, $headers, $query, $postData, $secret);
+
+        $this->assertEquals(32, strlen($r));
+
     }
 
 }
