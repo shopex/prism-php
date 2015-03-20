@@ -18,7 +18,7 @@ require_once(__DIR__ . '/TestBase.php');
 */
 class CurlTest extends TestBase  {
 
-    function setUp () {
+    function setUp() {
 
         $this->assertTrue( is_string($this->local_url) );
         $this->assertTrue( is_string($this->client_id) );
@@ -30,6 +30,7 @@ class CurlTest extends TestBase  {
 
         $this->client->access_token = 'cypae4opudqi57etvv6xacnf';
         $this->client->setRequester('curl');
+
     }
 
     public function testGET() {
@@ -39,9 +40,10 @@ class CurlTest extends TestBase  {
 
         $this->assertTrue( is_object($r) );
         $this->assertEquals('GET', $r->httpMethod);
-        $this->assertEquals('A', $r->header1);
-        $this->assertEquals('B', $r->header2);
-        $this->assertEquals(2, count((array)$r->query));
+        $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
+        $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
+        $this->assertEquals(count($this->params), count((array)$r->query));
+        $this->assertTrue( is_string($r->oauth) );
 
     }
 
@@ -55,9 +57,10 @@ class CurlTest extends TestBase  {
 
         $this->assertTrue( is_object($r) );
         $this->assertEquals('POST', $r->httpMethod);
-        $this->assertEquals('A', $r->header1);
-        $this->assertEquals('B', $r->header2);
-        $this->assertEquals(2, count((array)$r->data));
+        $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
+        $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
+        $this->assertEquals(count($this->params), count((array)$r->data));
+        $this->assertTrue( is_string($r->oauth) );
 
     }
 
@@ -71,9 +74,10 @@ class CurlTest extends TestBase  {
 
         $this->assertTrue( is_object($r) );
         $this->assertEquals('PUT', $r->httpMethod);
-        $this->assertEquals('A', $r->header1);
-        $this->assertEquals('B', $r->header2);
-        $this->assertEquals(2, count((array)$r->data));
+        $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
+        $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
+        $this->assertEquals(count($this->params), count((array)$r->data));
+        $this->assertTrue( is_string($r->oauth) );
 
     }
 
@@ -87,9 +91,10 @@ class CurlTest extends TestBase  {
 
         $this->assertTrue( is_object($r) );
         $this->assertEquals('DELETE', $r->httpMethod);
-        $this->assertEquals('A', $r->header1);
-        $this->assertEquals('B', $r->header2);
-        $this->assertEquals(2, count((array)$r->query));
+        $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
+        $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
+        $this->assertEquals(count($this->params), count((array)$r->query));
+        $this->assertTrue( is_string($r->oauth) );
 
     }
 
