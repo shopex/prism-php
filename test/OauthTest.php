@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__ . '/TestBase.php');
-require_once(__DIR__ . '/../src/Prism.php');
 
 /**
 *
@@ -12,22 +11,39 @@ require_once(__DIR__ . '/../src/Prism.php');
 */
 class OauthTest extends TestBase  {
 
-    var $client = '';
-    var $token  = '';
+    // 请先获取并修改成最新的有效code(token提取码/临时Token)
+    // 192.168.51.50:8080/oauth/authorize?client_id=pufy2a7d
+    var $code = '43sw7gs3ludec6im4nry';
 
-    function __construct () {
-        $this->client = new Prism($this->url, $this->client_id, $this->secret);
+    function setUp() {
+
+        $this->assertTrue( is_string($this->local_url) );
+        $this->assertTrue( is_string($this->client_id) );
+        $this->assertTrue( is_string($this->secret) );
+
+        $this->client = new Prism($this->local_url, $this->client_id, $this->secret);
+
+        $this->assertTrue( is_object($this->client) );
+
     }
 
     public function testOauth() {
 
+        // getToken
         $token = $this->client->getToken($this->code);
-        $token = $this->client->refreshToken($token);
 
-        if ($token && $token->access_token)
-            $result = $this->client->checkSession($token);
+        $this->assertTrue( is_string($token->access_token) );
+        $this->assertTrue( is_string($token->refresh_token) );
 
-        $this->assertEquals(1, $result->result);
+        // refreshToken
+        $refreshed_token = $this->client->refreshToken($token);
+
+        $this->assertTrue( is_string($refreshed_token->access_token) );
+
+        // checkSession
+        $check_session_result = $this->client->checkSession($refreshed_token);
+        $this->assertEquals(1, $check_session_result->result);
+
     }
 
 }
