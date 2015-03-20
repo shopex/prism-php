@@ -19,87 +19,78 @@ require_once(__DIR__ . '/TestBase.php');
 */
 class CurlTest extends TestBase  {
 
-    function __construct () {
-        $this->client = new Prism($this->url, $this->client_id, $this->secret);
+    function setUp () {
+
+        $this->assertTrue( is_string($this->local_url) );
+        $this->assertTrue( is_string($this->client_id) );
+        $this->assertTrue( is_string($this->secret) );
+
+        $this->client = new Prism($this->local_url, $this->client_id, $this->secret);
+
+        $this->assertTrue( is_object($this->client) );
+
         $this->client->access_token = 'cypae4opudqi57etvv6xacnf';
         $this->client->setRequester('curl');
     }
 
     public function testGET() {
 
-        $httpGetResult = 'httpGetResult:ERROR';
-        $r = $this->client->get('/test/test?param3=E&param4=F', $this->params, $this->headers);
+        $r = $this->client->get('/test/test', $this->params, $this->headers);
         $r = json_decode($r);
 
-        if (
-            $r &&
-            $r->httpMethod == 'GET' &&
-            $r->header1 == 'A' &&
-            $r->header2 == 'B' &&
-            $r->oauth &&
-            count((array)$r->query) == 4
-        )
-            $httpGetResult = 'httpGetResult:OK';
-
-        $this->assertEquals('httpGetResult:OK', $httpGetResult);
+        $this->assertTrue( is_object($r) );
+        $this->assertEquals('GET', $r->httpMethod);
+        $this->assertEquals('A', $r->header1);
+        $this->assertEquals('B', $r->header2);
+        $this->assertEquals(2, count((array)$r->query));
 
     }
 
+    /**
+     * @depends testGET
+     */
     public function testPOST() {
 
-        $httpPostResult = 'httpPostResult:ERROR';
-        $r = $this->client->post('/test/test?param3=E&param4=F', $this->params, $this->headers);
+        $r = $this->client->post('/test/test', $this->params, $this->headers);
         $r = json_decode($r);
 
-        if (
-            $r &&
-            $r->httpMethod == 'POST' &&
-            $r->header1 == 'A' &&
-            $r->header2 == 'B' &&
-            $r->oauth &&
-            count((array)$r->data) == 4
-        )
-            $httpPostResult = 'httpPostResult:OK';
-
-        $this->assertEquals('httpPostResult:OK', $httpPostResult);
+        $this->assertTrue( is_object($r) );
+        $this->assertEquals('POST', $r->httpMethod);
+        $this->assertEquals('A', $r->header1);
+        $this->assertEquals('B', $r->header2);
+        $this->assertEquals(2, count((array)$r->data));
 
     }
 
+    /**
+     * @depends testPOST
+     */
     public function testPUT() {
 
-        $httpPutResult = 'httpPutResult:ERROR';
-        $r = $this->client->put('/test/test?param3=E&param4=F', $this->params, $this->headers);
+        $r = $this->client->put('/test/test', $this->params, $this->headers);
         $r = json_decode($r);
 
-        if (
-            $r &&
-            $r->httpMethod == 'PUT' &&
-            $r->header1 == 'A' &&
-            $r->header2 == 'B' &&
-            $r->oauth &&
-            count((array)$r->data) == 4
-        )
-            $httpPutResult = 'httpPutResult:OK';
-        $this->assertEquals('httpPutResult:OK', $httpPutResult);
+        $this->assertTrue( is_object($r) );
+        $this->assertEquals('PUT', $r->httpMethod);
+        $this->assertEquals('A', $r->header1);
+        $this->assertEquals('B', $r->header2);
+        $this->assertEquals(2, count((array)$r->data));
 
     }
 
+    /**
+     * @depends testGET
+     */
     public function testDELETE() {
 
-        $httpDeleteResult = 'httpDeleteResult:ERROR';
-        $r = $this->client->delete('/test/test?param3=E&param4=F', $this->params, $this->headers);
+        $r = $this->client->delete('/test/test', $this->params, $this->headers);
         $r = json_decode($r);
 
-        if (
-            $r &&
-            $r->httpMethod == 'DELETE' &&
-            $r->header1 == 'A' &&
-            $r->header2 == 'B' &&
-            $r->oauth &&
-            count((array)$r->query) == 4
-        )
-            $httpDeleteResult = 'httpDeleteResult:OK';
-        $this->assertEquals('httpDeleteResult:OK', $httpDeleteResult);
+        $this->assertTrue( is_object($r) );
+        $this->assertEquals('DELETE', $r->httpMethod);
+        $this->assertEquals('A', $r->header1);
+        $this->assertEquals('B', $r->header2);
+        $this->assertEquals(2, count((array)$r->query));
 
     }
 
