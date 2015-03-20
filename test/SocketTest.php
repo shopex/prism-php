@@ -3,7 +3,7 @@
 require_once(__DIR__ . '/TestBase.php');
 
 /*
-    CURL请求测试
+    Socket请求测试
 
     用途：
     测试SDK的基础HTTP(Socket)请求功能
@@ -15,94 +15,82 @@ require_once(__DIR__ . '/TestBase.php');
     PUT方法参数通过Body传递
     DELETE方法参数通过Query传递
     能够携带自定义Header
-    path中的query会被合并到Query或者Body里
 */
 class SocketTest extends TestBase  {
 
-    function __construct () {
-        $this->client = new Prism($this->url, $this->client_id, $this->secret);
+    function setUp () {
+
+        $this->assertTrue( is_string($this->local_url) );
+        $this->assertTrue( is_string($this->client_id) );
+        $this->assertTrue( is_string($this->secret) );
+
+        $this->client = new Prism($this->local_url, $this->client_id, $this->secret);
+
+        $this->assertTrue( is_object($this->client) );
+
         $this->client->access_token = 'cypae4opudqi57etvv6xacnf';
         $this->client->setRequester('socket');
     }
 
     public function testGET() {
 
-        $httpGetResult = 'httpGetResult:ERROR';
-        $r = $this->client->get('/test/test?param3=E&param4=F', $this->params, $this->headers);
+        $r = $this->client->get('/test/test', $this->params, $this->headers);
         $r = json_decode($r);
 
-        if (
-            $r &&
-            $r->httpMethod == 'GET' &&
-            $r->header1 == 'A' &&
-            $r->header2 == 'B' &&
-            $r->oauth &&
-            count((array)$r->query) == 4
-        )
-            $httpGetResult = 'httpGetResult:OK';
-
-        $this->assertEquals('httpGetResult:OK', $httpGetResult);
+        $this->assertTrue( is_object($r) );
+        $this->assertEquals('GET', $r->httpMethod);
+        $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
+        $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
+        $this->assertEquals(count($this->params), count((array)$r->query));
 
     }
 
+    /**
+     * @depends testGET
+     */
     public function testPOST() {
 
-        $httpPostResult = 'httpPostResult:ERROR';
-        $r = $this->client->post('/test/test?param3=E&param4=F', $this->params, $this->headers);
+        $r = $this->client->post('/test/test', $this->params, $this->headers);
         $r = json_decode($r);
 
-        if (
-            $r &&
-            $r->httpMethod == 'POST' &&
-            $r->header1 == 'A' &&
-            $r->header2 == 'B' &&
-            $r->oauth &&
-            count((array)$r->data) == 4
-        )
-            $httpPostResult = 'httpPostResult:OK';
-
-        $this->assertEquals('httpPostResult:OK', $httpPostResult);
+        $this->assertTrue( is_object($r) );
+        $this->assertEquals('POST', $r->httpMethod);
+        $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
+        $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
+        $this->assertEquals(count($this->params), count((array)$r->data));
 
     }
 
+    /**
+     * @depends testPOST
+     */
     public function testPUT() {
 
-        $httpPutResult = 'httpPutResult:ERROR';
-        $r = $this->client->put('/test/test?param3=E&param4=F', $this->params, $this->headers);
+        $r = $this->client->put('/test/test', $this->params, $this->headers);
         $r = json_decode($r);
 
-        if (
-            $r &&
-            $r->httpMethod == 'PUT' &&
-            $r->header1 == 'A' &&
-            $r->header2 == 'B' &&
-            $r->oauth &&
-            count((array)$r->data) == 4
-        )
-            $httpPutResult = 'httpPutResult:OK';
-        $this->assertEquals('httpPutResult:OK', $httpPutResult);
+        $this->assertTrue( is_object($r) );
+        $this->assertEquals('PUT', $r->httpMethod);
+        $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
+        $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
+        $this->assertEquals(count($this->params), count((array)$r->data));
 
     }
 
+    /**
+     * @depends testGET
+     */
     public function testDELETE() {
 
-        $httpDeleteResult = 'httpDeleteResult:ERROR';
-        $r = $this->client->delete('/test/test?param3=E&param4=F', $this->params, $this->headers);
+        $r = $this->client->delete('/test/test', $this->params, $this->headers);
         $r = json_decode($r);
 
-        if (
-            $r &&
-            $r->httpMethod == 'DELETE' &&
-            $r->header1 == 'A' &&
-            $r->header2 == 'B' &&
-            $r->oauth &&
-            count((array)$r->query) == 4
-        )
-            $httpDeleteResult = 'httpDeleteResult:OK';
-        $this->assertEquals('httpDeleteResult:OK', $httpDeleteResult);
+        $this->assertTrue( is_object($r) );
+        $this->assertEquals('DELETE', $r->httpMethod);
+        $this->assertEquals($this->headers['X_API_UNITTEST1'], $r->header1);
+        $this->assertEquals($this->headers['X_API_UNITTEST2'], $r->header2);
+        $this->assertEquals(count($this->params), count((array)$r->query));
 
     }
 
 }
-
-
