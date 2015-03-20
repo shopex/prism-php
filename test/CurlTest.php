@@ -15,7 +15,6 @@ require_once(__DIR__ . '/TestBase.php');
     PUT方法参数通过Body传递
     DELETE方法参数通过Query传递
     能够携带自定义Header
-    path中的query会被合并到Query或者Body里
 */
 class CurlTest extends TestBase  {
 
