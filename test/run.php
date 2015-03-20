@@ -13,7 +13,7 @@ $descriptorspec = array(
    2 => array("pipe", "r") // 标准错误，写入到一个文件
 );
 
-$server = proc_open('php -S 0.0.0.0:8080 testserver.php', $descriptorspec, $pipes);
+$server = proc_open('php -S 0.0.0.0:8080 test-server.php', $descriptorspec, $pipes);
 
 
 // 测试
