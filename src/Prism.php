@@ -3,9 +3,9 @@ require_once(__DIR__ . '/Requester.php');
 require_once(__DIR__ . '/Oauth.php');
 require_once(__DIR__ . '/Notify.php');
 
-require_once(__DIR__ . '/Curl.php');
-require_once(__DIR__ . '/Socket.php');
-require_once(__DIR__ . '/Sign.php');
+require_once(__DIR__ . '/../modules/Curl.php');
+require_once(__DIR__ . '/../modules/Socket.php');
+require_once(__DIR__ . '/../modules/Sign.php');
 
 Class Prism extends Notify {
 
