@@ -15,7 +15,7 @@ class Notify extends Oauth {
     const PingFrame     = 0x09;
     const PongFrame     = 0x09;
 
-    public function connect () {
+    public function connectNotify () {
 
         $headers = array(
             'Upgrade'=>'websocket',
@@ -68,8 +68,8 @@ class Notify extends Oauth {
         fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionConsume , '') ) );
 
         // 获取结果
-        while (!isset($this->messages[0])){
-            $this->recv_message();
+        while ( !isset($this->messages[0]) ) {
+            $this->recvMessage();
         }
 
         return $this->messages[0];
@@ -87,11 +87,6 @@ class Notify extends Oauth {
             return $r;
 
     }
-
-
-
-
-
 
     private function encode($type, $data='') {
 
@@ -123,7 +118,7 @@ class Notify extends Oauth {
         return $res;
     }
 
-    private function recv_message(){
+    private function recvMessage(){
         $raw = fread($this->websocket, 8192);
 
         $raw = $this->last_buf . $raw;
