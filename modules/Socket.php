@@ -60,7 +60,7 @@ class Socket {
         while (!feof($fp)) {
 
             if ( $this->check_time_out($fp) ) // 检查有没有超时
-                throw new Exception('Socket read timeout.');
+                throw new PrismException('Socket read timeout.');
 
             $buffer = fgets($fp, 128);
             $result .= $buffer;

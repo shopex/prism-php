@@ -43,7 +43,7 @@ class Curl {
 
         // 遇到错误
         if ( curl_errno($curl) )
-            throw new Exception( curl_error($curl) );
+            throw new PrismException( curl_error($curl) );
 
         // 关闭URL请求
         curl_close($curl);
