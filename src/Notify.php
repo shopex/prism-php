@@ -34,6 +34,13 @@ class Notify extends Oauth {
         $header3 = fgets($this->websocket, 128);
         $header4 = fgets($this->websocket, 128);
 
+        register_shutdown_function(array($this, 'closeNotify'));
+
+    }
+
+    public function closeNotify () {
+        fwrite($this->websocket, $this->encode(self::CloseFrame));
+        fclose($this->websocket);
     }
 
     public function publish($routing_key, $message, $content_type = "text/plain"){
