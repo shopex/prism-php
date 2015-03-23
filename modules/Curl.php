@@ -1,9 +1,6 @@
 <?php
 class Curl {
 
-    function __construct() {
-    }
-
     public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
 
         // 初始化一个cURL对象
