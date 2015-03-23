@@ -73,6 +73,17 @@ class Requester {
     }
 
     /**
+    * 设置HTTP包的类型
+    */
+    public function setRequester($string) {
+        if ($string == 'curl')
+            $this->http = new Curl();
+
+        if ($string == 'socket')
+            $this->http = new Socket();
+    }
+
+    /**
     * 备用http方法
     */
     public function fileGetContents($http_method = 'GET', $url, $headers, $postData = null) {

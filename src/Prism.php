@@ -34,17 +34,6 @@ Class Prism extends Notify {
     }
 
     /**
-    * 设置HTTP包的类型
-    */
-    public function setRequester($string) {
-        if ($string == 'curl')
-            $this->http = new Curl();
-
-        if ($string == 'socket')
-            $this->http = new Socket();
-    }
-
-    /**
     * GET
     */
     public function get ($path, $params = null, $headers = null) {
