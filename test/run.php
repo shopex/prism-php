@@ -21,6 +21,7 @@ popen('phpunit CurlTest.php >> report', 'r');
 popen('phpunit SocketTest.php >> report', 'r');
 popen('phpunit SignTest.php >> report', 'r');
 popen('phpunit OauthTest.php >> report', 'r');
+popen('phpunit NotifyTest.php >> report', 'r');
 
 
 // 分析report
