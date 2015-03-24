@@ -1,10 +1,10 @@
 <?php
 class Notify extends Oauth {
 
-    var $last_buf = '';
     var $websocket;
-    var $messages = array();
-    var $consuming = false;
+    var $last_buf   = '';
+    var $messages   = array();
+    var $consuming  = false;
 
     const actionPublish = 0x01;
     const actionConsume = 0x02;
