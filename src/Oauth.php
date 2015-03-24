@@ -79,7 +79,7 @@ class Oauth extends Requester {
 
         $params = array(
             'response_type' => 'code',
-            'client_id' => 'pufy2a7d',
+            'client_id' => $this->app_key,
         );
 
         if ($redirect)
