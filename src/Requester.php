@@ -18,9 +18,6 @@ class Requester {
         // 准备query, headers, postData
         $query    = array();
         $postData = array();
-        if(isset($url_arr['query']))
-            parse_str($url_arr['query'], $query);
-
 
         $headers['Pragma']        = 'no-cache';
         $headers['Cache-Control'] = 'no-cache';
@@ -29,20 +26,17 @@ class Requester {
 
             case 'GET':
             case 'DELETE':
-                if (is_array($params))
+                if ($params)
                     $query = array_merge($query, $params);
             break;
 
             case 'POST':
             case 'PUT':
-                $postData                 = array_merge($query, $params);
-                $query                    = array();
+                if ($params)
+                    $postData = array_merge($postData, $params);
+
                 $headers['Content-Type']  = 'application/x-www-form-urlencoded';
             break;
-
-            default:
-                if (is_array($params))
-                    $query = array_merge($query, $params);
 
         }
 
