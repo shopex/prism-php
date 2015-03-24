@@ -69,7 +69,8 @@ class Socket {
         fclose($fp);
 
         // 解析结果
-        list($response['Header'], $response['Body']) = preg_split("/\r\n\r\n/", $result);
+        if ($result)
+            list($response['Header'], $response['Body']) = preg_split("/\r\n\r\n/", $result);
 
         $response['Header'] = $this->parse_http_header($response['Header']);
 
