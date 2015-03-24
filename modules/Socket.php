@@ -49,9 +49,9 @@ class Socket {
         $response['StatusCode'] = '';
 
 
-        $response['Line'] = fgets($fp, 128);
+        $response['Line'] = fgets($fp, 128); // 解析第一行
 
-        if(preg_match('/\d{3}/', $response['Line'], $match))
+        if(preg_match('/\d{3}/', $response['Line'], $match)) // 获取status code
             $response['StatusCode'] = $match[0];
 
         if($response['StatusCode'] == 101) // websocket，直接返回stream
