@@ -10,7 +10,7 @@ require_once(__DIR__.'/../src/Prism.php');
 $client = new Prism($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
 
-// 设置底层请求方式（默认用curl）
+// 可以设置使用CURL还是SOCKET请求方式，默认会优先调用CURL方法
 //$client->setRequester('socket');
 
 // 发起请求
