@@ -1,9 +1,10 @@
 <?php
 class Notify extends Oauth {
 
-    var $last_buf;
+    var $last_buf = '';
     var $websocket;
     var $messages = array();
+    var $consuming = false;
 
     const actionPublish = 0x01;
     const actionConsume = 0x02;
@@ -22,17 +23,17 @@ class Notify extends Oauth {
             'Sec-Websocket-Key' => base64_encode(time()),
             'Sec-WebSocket-Version' => 13,
             'Sec-WebSocket-Protocol' => 'chat',
-            'Origin' => 'http://192.168.51.50:8080/api/platform/notify',
+            'Origin' => $this->base_url.'/platform/notify',
             'Connection'=>'Upgrade'
         );
 
         $this->setRequester('socket');
         $this->websocket = $this->get('/platform/notify', '', $headers);
 
-        $header1 = fgets($this->websocket, 128);
-        $header2 = fgets($this->websocket, 128);
-        $header3 = fgets($this->websocket, 128);
-        $header4 = fgets($this->websocket, 128);
+        $header1 = fgets($this->websocket, 512);
+        $header2 = fgets($this->websocket, 512);
+        $header3 = fgets($this->websocket, 512);
+        $header4 = fgets($this->websocket, 512);
 
         register_shutdown_function(array($this, 'closeNotify'));
 
@@ -44,6 +45,9 @@ class Notify extends Oauth {
     }
 
     public function publish($routing_key, $message, $content_type = "text/plain"){
+
+        if (!$this->websocket)
+            $this->connectNotify();
 
         $size_routing_key   = strlen($routing_key);
         $size_message       = strlen($message);
@@ -59,7 +63,7 @@ class Notify extends Oauth {
             $content_type
         );
 
-        $r = fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionPublish , $data) ) );
+        $r = fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionPublish, $data) ) );
 
         if ($r)
             return true;
@@ -71,20 +75,28 @@ class Notify extends Oauth {
 
     public function consume () {
 
+        if (!$this->websocket)
+            $this->connectNotify();
+
         // 发请求
-        fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionConsume , '') ) );
+        if (!$this->consuming) {
+            fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionConsume , '') ) );
+            $this->consuming = true;
+        }
 
         // 获取结果
         while ( !isset($this->messages[0]) ) {
             $this->recvMessage();
         }
 
-        return $this->messages[0];
+        return array_shift($this->messages);
 
     }
 
     public function ack ($tag_id) {
 
+        if (!$this->websocket)
+            $this->connectNotify();
 
         $r = fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionAck, $tag_id) ) );
 
