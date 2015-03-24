@@ -6,16 +6,12 @@ $client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $
 
 
 
+while(1) {
 
+    $r = $client->consume();
+    $r = json_decode($r);
 
-while (1) {
-
-
-    $client->connectNotify();
-    echo $client->consume() . "\n";
-    $client->ack(1);
-
-//    sleep(1);
+    echo "$r->body\n";
+    $client->ack($r->tag);
 
 }
-
