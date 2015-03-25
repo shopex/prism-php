@@ -1,4 +1,7 @@
 <?php
+// 先起服务器
+// php -S 0.0.0.0:8080 server.php
+
 require_once(__DIR__.'/../src/Provider.php');
 
 $server = new Provider();
