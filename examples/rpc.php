@@ -5,8 +5,8 @@ require_once(__DIR__.'/../src/Prism.php');
 // php -S 0.0.0.0:8080 test/testserver.php
 
 // 新建对象 填入在Prism平台上注册的信息 本地测试的话随意填写就行了
-//$client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
-$client = new Prism($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+$client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+//$client = new Prism($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
 // 准备一些自定义Header信息
 $headers = array(
@@ -16,8 +16,8 @@ $headers = array(
 
 // 准备一些需要传递给API的参数
 $params = array(
-	'param1' =>'C',
-	'param2' =>'D',
+	'student id' =>'101',
+	'student name' =>'Jason',
 );
 
 // 可以设置使用CURL还是SOCKET请求方式，默认会优先调用CURL方法
@@ -27,10 +27,10 @@ $client->setRequester('curl');
 // 发起GET/POST/PUT/DELETE请求
 $result = array();
 
-$result['GET']      = $client->get('/test/test', $params, $headers);
-$result['POST']     = $client->post('/test/test', $params, $headers);
-$result['PUT']      = $client->put('/test/test', $params, $headers);
-$result['DELETE']   = $client->delete('/test/test', $params, $headers);
+$result['GET']      = $client->get('/university/student', $params, $headers);
+$result['POST']     = $client->post('/university/student', $params, $headers);
+$result['PUT']      = $client->put('/university/student', $params, $headers);
+$result['DELETE']   = $client->delete('/university/student', $params, $headers);
 
 print_r($result);
 

@@ -14,7 +14,7 @@ $client = new Prism($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secr
 //$client->setRequester('socket');
 
 // 发起请求
-echo $client->get('/test/test');
+echo $client->get('/university/student');
 
 // 应该返回
 // {"httpMethod":"GET","responseTime":"10ms"}
