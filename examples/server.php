@@ -17,8 +17,8 @@ $server->get( '/student', $api, 'fetchStudent', false );
 
 
 $server->post( '/student', $api, 'createStudent', true );
-$server->put( '/student', $api, 'modifyStudent' );
-$server->delete( '/student', $api, 'deleteStudent' );
+$server->put( '/student', $api, 'modifyStudent', true );
+$server->delete( '/student', $api, 'deleteStudent', true );
 
 
 // API处理器(handler/controller) 可以自己定义具体的名称
@@ -44,6 +44,16 @@ class Api {
 
     function createStudent($params, $headers, $request_id, $oauth_info, $response) {
         $response->send('success', 'student:44 is created');
+    }
+
+    function modifyStudent($params, $headers, $request_id, $oauth_info, $response) {
+        $response->send('success', 'student:' . $params['id'] . ' is modified');
+    }
+
+    function deleteStudent($params, $headers, $request_id, $oauth_info, $response) {
+        if (!$params['id'])
+            $response->send('error', 'missing id');
+        $response->send('success', 'student:' . $params['id'] . ' is deleted');
     }
 
 }

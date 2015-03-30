@@ -67,6 +67,9 @@ class Provider {
         // local fix
         $this->localFix();
 
+        // debug
+//        print_r($_SERVER);die;
+
     }
 
     // GET快捷方法
@@ -118,7 +121,7 @@ class Provider {
             $response->send('error', 'Method not found', 'Handling action is not found on server');
 
         // oauth判断
-        if ( $require_oauth && empty($oauth_info) )
+        if ( $require_oauth && empty($this->oauth_info) )
             $response->send('error', 'Invalid Request', 'Oauth is required');
 
         call_user_func(
