@@ -16,75 +16,17 @@ $headers = array(
 
 // 可以设置使用CURL还是SOCKET请求方式，默认会优先调用CURL方法
 $client->setRequester('socket');
-$client->setRequester('curl');
+//$client->setRequester('curl');
 
 
 // 可以携带Oauth的Access Token
 $client->access_token = 'c4t6q5rh6fysu5v5ww5xenv4';
 
 
-
-/**
-* 发起GET/POST/PUT/DELETE请求
-*/
-$result = array();
-
-
-/**
-* 通过id获取学生信息 (GET请求)
-*/
+// 通过category获取AppleStore产品列表 (GET请求)
 $params = array(
-	'id' =>'43',
+	'category' =>'mac',
 );
 $r = $client->get('/university/student', $params, $headers);
 echo $r."\n";
-// 返回结果：{"jsonrpc":"2.0","result":{"id":43,"name":"Rose DeWitt Bukater","age":17,"desc":"Is forced into an engagement to 30-year-old Cal Hockley."},"id":"fhildwpktl7ix4f2"}
-
-
-/**
-* 创建一个学生 (POST请求)
-*/
-$params = array(
-    'name'=>'Caledon Nathan',
-    'age'=>30,
-    'desc'=>"Cal is Rose's 30-year-old fiancé.",
-);
-//$r = $client->post('/university/student', $params, $headers);
-//echo $r."\n";
-// 返回结果：{"jsonrpc":"2.0","result":"student:44 is created","id":"byst26gcx3kdlkqw"}
-
-
-/**
-* 修改一个学生 (PUT请求)
-*/
-$params = array(
-    'id'=>43,
-    'name'=>'Rose DeWitt Bukater',
-    'age'=>80,
-    'desc'=>'Old lady.',
-);
-//$r = $client->put('/university/student', $params, $headers);
-//echo $r."\n";
-// 返回结果：{"jsonrpc":"2.0","result":"student:43 is modified","id":"u4picdkeoo326oai"}
-
-/**
-* 删除一个学生 (DELETE请求)
-*/
-$params = array(
-    'id'=>43,
-);
-//$r = $client->delete('/university/student', $params, $headers);
-//echo $r."\n";
-// 返回结果：{"jsonrpc":"2.0","result":"student:43 is deleted","id":"5odim7uwzgppfgpj"}
-
-/**
-* 删除一个学生 (DELETE请求)
-* 不携带acess token
-*/
-$client->access_token = null;
-$params = array(
-    'id'=>43,
-);
-//$r = $client->delete('/university/student', $params, $headers);
-//echo $r."\n";
-// 没有权限返回错误：{"jsonrpc":"2.0","error":{"code":"-32600","message":"Invalid Request","data":"Oauth is required"},"id":"psg6jyeuaffqw6bh"}
+// {"jsonrpc":"2.0","result":["macbook","macbook pro","macbook air"],"id":"4v3zjybwynqfenmx"}
