@@ -16,14 +16,37 @@ class AppleStore {
 
     public function getList($request, $response) {
 
-//        print_r($request->getParams());
+        $params = $request->getParams();
+        // $params = 'category' => 'mac'
 
-        $list = array('ipad', 'iphone', 'macbook');
+        $store = array(
+            'mac' => array('macbook', 'macbook pro', 'macbook air'),
+            'mobile' => array('ipad', 'iphone', 'ipod')
+        );
 
-        $response->setResult($list);
+        $result = $store[$params['category']];
+
+        if ($params['category'])
+            $response->setResult($result);
+        else
+            $response->setError('Invalid params', 'No category given');
+
         $response->send();
 
-        // 返回{"jsonrpc":"2.0","result":["ipad","iphone","macbook"],"id":"3mpm4wr76dtmejev"}
+        /*
+        echo $response->getJSON();
+        {
+            "jsonrpc":"2.0",
+            "result":["ipad","iphone","macbook"],
+            "id":"3mpm4wr76dtmejev"
+        }
+        or
+        {
+            "jsonrpc":"2.0",
+            "error":{"code":"-32602","message":"Invalid params","data":"No category given"},
+            "id":"ifepmss42vewq2b5"
+        }
+        */
     }
 
 }

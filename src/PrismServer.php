@@ -27,45 +27,6 @@ class PrismServer {
     }
 
     /**
-    * 接受请求
-    * $method: 请求方法 (GET/POST/PUT/DELETE)
-    * $path: 路由/method_id
-    * $api: api对象(处理器)
-    * $function_name: api对象处理方法
-    * $require_oauth: 是否需要oauth验证
-    */
-    private function receive ($method, $path, $api, $function_name, $require_oauth = false) {
-
-        $response = new Response($this->request_id);
-
-        // method判断
-        if($method != $this->method)
-            return;
-
-        // path判断
-        if($path != $this->path)
-            return;
-
-        // api对象(处理器)判断
-        if( !is_object($api) )
-            $response->send('error', 'Method not found', 'Handling object is not found on server');
-
-        // 处理方法判断
-        if ( !is_callable(array($api, $function_name)) )
-            $response->send('error', 'Method not found', 'Handling action is not found on server');
-
-        // oauth判断
-        if ( $require_oauth && empty($this->oauth_info) )
-            $response->send('error', 'Invalid Request', 'Oauth is required');
-
-        call_user_func(
-            array($api, $function_name),
-            $this->params, $this->headers, $this->request_id, $this->oauth_info, $response
-        );
-
-    }
-
-    /**
     * 分发请求到对象的方法
     */
     public function dispatch ($handler, $require_oauth = false) {

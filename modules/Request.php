@@ -53,6 +53,13 @@ class Request {
             unset($this->headers['CALLER_IP']);
         }
 
+        if ( isset($this->headers['REQUEST_ID']) ) {
+            $this->request_id = $this->headers['REQUEST_ID'];
+            unset($this->headers['REQUEST_ID']);
+        }
+
+//        print_r($_SERVER);die;
+
         $this->localFix();
 
     }

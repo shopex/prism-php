@@ -1,10 +1,35 @@
 <?php
 // 给PHP-SDK Provider来创建符合JSON RPC规范的JSON响应
-class Response {
+interface ResponseInterface {
+
+    // 添加自定义头 比如'Content-Type： text/json;charset=utf8'
+    public function setHeader($key, $value);
+
+    // 设置返回内容, $result可以是字符串数组对象等
+    public function setResult($result);
+
+    // 设置错误内容,会自动添加错误码 $message：错误类型, $data: 错误信息
+    public function setError($message, $data);
+
+    // 获取$headers 包括自定义的Header
+    public function getHeaders();
+
+    // 获取$request_id
+    public function getRequestID();
+
+    // 获取JSON格式的响应内容(JSONRPC2.0)
+    public function getJSON();
+
+    // 发送响应 会执行exit()
+    public function send();
+}
+
+class Response implements ResponseInterface {
 
     private $request_id;
+    private $headers = array();
     private $result;
-    private $error;
+    private $error = array();
     private $error_types = array(
 
         // Invalid JSON was received by the server.An error occurred on the server while parsing the JSON text.
@@ -32,19 +57,27 @@ class Response {
     */
     public function __construct($request_id) {
         $this->request_id = $request_id;
-        die($request_id);
+        $this->setHeader('Content-Type', 'text/json;charset=utf8');
+        $this->setHeader('X-Request-Id', $request_id);
     }
 
-    public function setHeader() {
-
+    public function setHeader($key, $value) {
+        $this->headers[$key] = $value;
+        header("{$key}: {$value}");
     }
 
     public function setResult($result) {
         $this->result = $result;
     }
 
-    public function setError($error) {
-        $this->error = $error;
+    public function setError($message, $data) {
+        $this->error['code']    = $this->error_types[$message];
+        $this->error['message'] = $message;
+        $this->error['data']    = $data;
+    }
+
+    public function getHeaders() {
+        return $this->headers;
     }
 
     public function getRequestID() {
@@ -53,27 +86,24 @@ class Response {
 
     public function getJSON() {
 
-    }
-
-    /**
-    *
-    */
-    public function send() {
-
         $result             = array();
         $result['jsonrpc']  = '2.0';
-        $result['result']   = $this->result;
 
-//        if ($status == 'error') {
-//            $error['code']    = $this->error_arr[$message];
-//            $error['message'] = $message;
-//            $error['data']    = $data;
-//            $result['error']  = $error;
-//        }
+        if($this->result)
+            $result['result']   = $this->result;
+
+        if ($this->error)
+            $result['error']  = $this->error;
 
         $result['id'] = $this->request_id;
 
-        echo json_encode($result);
+        return json_encode($result);
+
+    }
+
+    public function send() {
+
+        echo $this->getJSON();
         exit();
 
     }
