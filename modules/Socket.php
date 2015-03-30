@@ -103,7 +103,8 @@ class Socket {
     private function parse_http_header($str) {
 
         $lines = explode("\r\n", $str);
-        $head  = array(array_shift($lines));
+        // $head  = array(array_shift($lines)); 不需要解析第一行
+        $head  = array();
         foreach ($lines as $line) {
             list($key, $val) = explode(':', $line, 2);
             if ($key == 'Set-Cookie') {
