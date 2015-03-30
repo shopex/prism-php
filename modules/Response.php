@@ -55,25 +55,36 @@ class Response implements ResponseInterface {
     /**
     * $reuqest_id为必须
     */
-    public function __construct($request_id) {
+    public function __construct($request_id = null) {
+
+        if (!$request_id)
+            throw new PrismException('No request_id given to Response');
+
         $this->request_id = $request_id;
         $this->setHeader('Content-Type', 'text/json;charset=utf8');
         $this->setHeader('X-Request-Id', $request_id);
+
     }
 
     public function setHeader($key, $value) {
         $this->headers[$key] = $value;
         header("{$key}: {$value}");
+
+        return $this;
     }
 
     public function setResult($result) {
         $this->result = $result;
+
+        return $this;
     }
 
     public function setError($message, $data) {
         $this->error['code']    = $this->error_types[$message];
         $this->error['message'] = $message;
         $this->error['data']    = $data;
+
+        return $this;
     }
 
     public function getHeaders() {

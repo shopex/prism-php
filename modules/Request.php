@@ -1,5 +1,33 @@
 <?php
-class Request {
+// 给PHP-SDK Provider用来获取PHP Global参数并封装成请求对象
+interface RequestInterface {
+
+    // 获取请求中的Params
+    public function getParams();
+
+    // 获取请求中的Request ID
+    public function getRequestID();
+
+    // 获取用户登录的信息
+    public function getOauth();
+
+    // 获取应用的信息
+    public function getAppInfo();
+
+    //获取请求者IP
+    public function getCallerIP();
+
+    // 获取自定义头信息
+    public function getHeaders();
+
+    // 获取请求的类型GET/POST/PUT/DELETE
+    public function getMethod();
+
+    // 获取请求的地址 (path)
+    public function getPath();
+}
+
+class Request implements RequestInterface {
 
     private $remote_arr;
     private $method;
@@ -84,12 +112,16 @@ class Request {
         return $this->caller_ip;
     }
 
-    public function headers() {
+    public function getHeaders() {
         return $this->headers;
     }
 
     public function getMethod() {
         return $this->method;
+    }
+
+    public function getPath() {
+        return $this->path;
     }
 
     // query to array

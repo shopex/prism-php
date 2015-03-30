@@ -27,6 +27,6 @@ $client->access_token = 'c4t6q5rh6fysu5v5ww5xenv4';
 $params = array(
 	'category' =>'mac',
 );
-$r = $client->get('/university/student', $params, $headers);
+$r = $client->put('/university/student', $params, $headers);
 echo $r."\n";
 // {"jsonrpc":"2.0","result":["macbook","macbook pro","macbook air"],"id":"4v3zjybwynqfenmx"}
