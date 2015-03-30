@@ -2,8 +2,10 @@
 // 给PHP-SDK Provider来创建符合JSON RPC规范的JSON响应
 class Response {
 
-    var $reuqest_id;
-    var $error_arr = array(
+    private $request_id;
+    private $result;
+    private $error;
+    private $error_types = array(
 
         // Invalid JSON was received by the server.An error occurred on the server while parsing the JSON text.
         'Server error' => '-32000',
@@ -28,36 +30,48 @@ class Response {
     /**
     * $reuqest_id为必须
     */
-    public function __construct($reuqest_id) {
-        $this->reuqest_id = $reuqest_id;
+    public function __construct($request_id) {
+        $this->request_id = $request_id;
+        die($request_id);
+    }
+
+    public function setHeader() {
+
+    }
+
+    public function setResult($result) {
+        $this->result = $result;
+    }
+
+    public function setError($error) {
+        $this->error = $error;
+    }
+
+    public function getRequestID() {
+        return $request_id;
+    }
+
+    public function getJSON() {
+
     }
 
     /**
-    * $status response类型 success/error
-    * $message succes是返回成result，error时返回成error message
-    * $data error时返回error data
+    *
     */
-    public function send($status, $message = null, $data = null) {
-
-        if ($status != 'success' && $status != 'error')
-            throw new PrismException("Status of response can only be 'success' of 'error'");
-
+    public function send() {
 
         $result             = array();
-        $error              = array();
         $result['jsonrpc']  = '2.0';
+        $result['result']   = $this->result;
 
-        if ($status == 'success')
-            $result['result'] = $message;
+//        if ($status == 'error') {
+//            $error['code']    = $this->error_arr[$message];
+//            $error['message'] = $message;
+//            $error['data']    = $data;
+//            $result['error']  = $error;
+//        }
 
-        if ($status == 'error') {
-            $error['code']    = $this->error_arr[$message];
-            $error['message'] = $message;
-            $error['data']    = $data;
-            $result['error']  = $error;
-        }
-
-        $result['id'] = $this->reuqest_id;
+        $result['id'] = $this->request_id;
 
         echo json_encode($result);
         exit();
