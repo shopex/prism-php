@@ -1,8 +1,8 @@
 <?php
 // 先起服务器 php -S 0.0.0.0:8080 server.php
 require_once(__DIR__.'/../src/PrismServer.php');
-require_once(__DIR__.'/../middlewares/EcosSign.php');
-require_once(__DIR__.'/../middlewares/PrismSign.php');
+require_once(__DIR__.'/../middlewares/EcosValidator.php');
+require_once(__DIR__.'/../middlewares/PrismValidator.php');
 require_once(__DIR__.'/../middlewares/Logger.php');
 
 
