@@ -169,6 +169,9 @@ class Request implements RequestInterface {
         unset($this->params['sign_time']);
         unset($this->params['sign']);
 
+        // requestid
+        $this->request_id = '7dukfu4ssxrfugvd';
+
     }
 
 }

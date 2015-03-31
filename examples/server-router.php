@@ -17,11 +17,16 @@ $server->uses('Logger@show'); // 使用Ecos的验签middleware来验证前面
 * $handler:         类名@方法名
 * $require_oauth:   是否需要oauth验证(默认为false)
 */
-$server->get('/get_list', 'AppleStore@getList', true);
+$server->get('/ping', 'AppleStore@pong');
+//$server->get('/get_list', 'AppleStore@getList', true);
 //$server->post('get_list', 'AppleStore@getList', true);
 
 
 class AppleStore {
+
+    public function pong() {
+        echo "pong";
+    }
 
     public function getList($request, $response) {
 

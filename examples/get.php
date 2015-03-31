@@ -6,15 +6,14 @@ require_once(__DIR__.'/../src/PrismClient.php');
 // php -S 0.0.0.0:8080 test/testserver.php
 
 // 新建对象 填入在Prism平台上注册的信息 本地测试的话随意填写就行了
-//$client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
-$client = new PrismClient($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+$client = new PrismClient($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+//$client = new PrismClient($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
 
 // 可以设置使用CURL还是SOCKET请求方式，默认会优先调用CURL方法
 //$client->setRequester('socket');
 
 // 发起请求
-echo $client->get('/university/student');
+echo $client->get('/apple_store/ping');
 
-// 应该返回
-// {"httpMethod":"GET","responseTime":"10ms"}
+// 返回: pong
