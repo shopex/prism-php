@@ -48,7 +48,7 @@ class Requester {
             $headers["Authorization"] = "Bearer " . $this->access_token;
 
         // 生成数字签名
-        $query['sign'] = Sign::produce($http_method, $url_arr['path'], $headers, $query, $postData, $this->app_secret);
+        $query['sign'] = PrismSign::produce($http_method, $url_arr['path'], $headers, $query, $postData, $this->app_secret);
 
         // https
         if ($url_arr['scheme'] == 'https') {
