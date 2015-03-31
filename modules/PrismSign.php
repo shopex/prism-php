@@ -8,6 +8,7 @@ class PrismSign {
     //PostParams    = urnencode(PostKey1 + PostValue1 + PostKey2 + PostValue2 ...)
     //ClientSecret  = key的Secret密钥
     public static function produce ($method, $path, $headers, $query, $postData, $secret) {
+
         $sign = array(
             $secret,
             $method,
