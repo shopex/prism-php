@@ -5,12 +5,9 @@ class EcosSign {
     public function validate($request, $response) {
 
         // 获取sign的值并清理params
-        print_r($request->params);
-
         $sign = $request->params['sign'];
         unset($request->params['sign']);
 
-        print_r($request->params);
 
         // 输入参数和Token进行校验
         if ( $sign == EcosSign::sign($request->params, '123456') )
