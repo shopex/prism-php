@@ -10,8 +10,8 @@ $server = new PrismServer(); // 创建服务端实例
 
 //$server->setRoutingKey('method'); // 利用请求参数进行分发时设置routing key
 
-//$server->uses('EcosValidator@validate'); // 使用Ecos的验签middleware来验证前面
-$server->uses('PrismValidator@validate'); // 使用Prism的验签middleware来验证前面
+$server->uses('EcosValidator@validate'); // 使用Ecos的验签middleware来验证前面
+//$server->uses('PrismValidator@validate'); // 使用Prism的验签middleware来验证前面
 $server->uses('Logger@show'); // 使用Logger来记录日志
 
 /**
