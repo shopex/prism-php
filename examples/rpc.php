@@ -33,9 +33,7 @@ $r = $client->get('/apple_store/get_list', $params, $headers);
 // 通过category获取AppleStore产品列表 (POST请求) 利用请求参数进行分发 method
 //$params = array(
 //    'method' =>'get_list',
-//	'category' =>'mac',
-//	'a' =>'b',
-//	'a' =>'c'
+//	  'category' =>'mac'
 //);
 //
 //$r = $client->post('/apple_store', $params, $headers);
