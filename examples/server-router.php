@@ -5,7 +5,9 @@ require_once(__DIR__.'/../src/PrismServer.php');
 
 $server = new PrismServer(); // 创建服务端实例
 
-//$server->setRoutingKey('method'); // 利用请求参数进行分发时设置routing key
+// $server->setRoutingKey('method'); // 利用请求参数进行分发时设置routing key
+
+// $server->setValidator('method');
 
 /**
 * $path:            路由地址(path)
