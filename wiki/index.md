@@ -18,11 +18,11 @@ PHP Prism SDK下载后直接使用无需安装，目前没有PHP版本要求。 
 
 ## Prism Client 用法 ##
 - [快速开始](https://git.ishopex.cn/prism-sdk/prism-php/blob/0.3/wiki/get.md)
-- [详细请求方法GET/POST/PUT/DELETE](https://git.ishopex.cn/prism-sdk/prism-php/blob/0.3/wiki/rpc.md)
-- [Oauth认证](https://git.ishopex.cn/prism-sdk/prism-php/blob/0.3/wiki/oauth.md)
-- [Notify](https://git.ishopex.cn/prism-sdk/prism-php/blob/0.3/wiki/notify.md)
+- [详细请求方法GET/POST/PUT/DELETE](rpc)
+- [Oauth认证](oauth)
+- [Notify](notify)
 
 
 ## Prism Server 用法 ##
-- [带路由的Server](https://git.ishopex.cn/prism-sdk/prism-php/blob/0.3/wiki/server-router.md)
-- [不带路由的Server](https://git.ishopex.cn/prism-sdk/prism-php/blob/0.3/wiki/server-norouter.md)
+- [带路由的Server](server-router)
+- [不带路由的Server](server-norouter)
