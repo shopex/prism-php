@@ -90,7 +90,7 @@ class Request implements RequestInterface {
 //            unset($this->headers['X_REQUEST_ID']);
         }
 
-        $this->localFix();
+//        $this->localFix();
 
     }
 
