@@ -5,7 +5,7 @@ require_once(__DIR__ . '/Notify.php');
 
 require_once(__DIR__ . '/../modules/Curl.php');
 require_once(__DIR__ . '/../modules/Socket.php');
-require_once(__DIR__ . '/../modules/Sign.php');
+require_once(__DIR__ . '/../modules/PrismSign.php');
 require_once(__DIR__ . '/../modules/PrismException.php');
 
 Class Prism extends Notify {

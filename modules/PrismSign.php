@@ -1,5 +1,5 @@
 <?php
-class Sign {
+class PrismSign {
 
     //Method        = GET | POST | DELETE | PUT ...
     //Path          = /path/to/method
