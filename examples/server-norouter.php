@@ -2,7 +2,6 @@
 // 先起服务器 php -S 0.0.0.0:8080 server.php
 require_once(__DIR__.'/../src/PrismServer.php');
 
-
 $server = new PrismServer(); // 创建服务端实例
 
 /**
