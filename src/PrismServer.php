@@ -36,7 +36,8 @@ class PrismServer implements PrismServerInterface {
 
         if ($this->routing_key)
             $request->setRoutingKey($this->routing_key);
-
+var_dump($request->getPath());
+var_dump($path);
         if ($request->getMethod() != 'GET')
             return;
 

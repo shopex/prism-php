@@ -23,15 +23,22 @@ $client->setRequester('socket');
 $client->access_token = 'c4t6q5rh6fysu5v5ww5xenv4';
 
 
-// 通过category获取AppleStore产品列表 (GET请求)
+// 通过category获取AppleStore产品列表 (GET请求) /api/path
 $params = array(
-    'method' =>'get_list',
 	'category' =>'mac'
 );
+$r = $client->get('/apple_store/get_list', $params, $headers);
 
 
-// /api名称/methodID或path
-//$r = $client->put('/university/student', $params, $headers);
-$r = $client->get('/apple_store', $params, $headers);
+// 通过category获取AppleStore产品列表 (POST请求) 利用请求参数进行分发 method
+//$params = array(
+//    'method' =>'get_list',
+//	'category' =>'mac'
+//);
+//
+//$r = $client->post('/apple_store', $params, $headers);
+
+
+
 echo $r."\n";
 // {"jsonrpc":"2.0","result":["macbook","macbook pro","macbook air"],"id":"4v3zjybwynqfenmx"}
