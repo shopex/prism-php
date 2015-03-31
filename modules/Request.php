@@ -25,6 +25,9 @@ interface RequestInterface {
 
     // 获取请求的地址 (path)
     public function getPath();
+
+    // 设置routing key
+    public function setRoutingKey($routing_key);
 }
 
 class Request implements RequestInterface {
