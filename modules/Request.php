@@ -26,20 +26,18 @@ interface RequestInterface {
     // 获取请求的地址 (path)
     public function getPath();
 
-    // 设置routing key
-    public function setRoutingKey($routing_key);
 }
 
 class Request implements RequestInterface {
 
     private $remote_arr;
     private $method;
-    private $path;
+    public $path;
     private $caller_ip;
     private $request_id;
     private $query      = array();
     private $post_data  = array();
-    private $params     = array();
+    public $params     = array();
     private $headers    = array();
     private $app_info   = array();
     private $oauth_info = array();
@@ -128,16 +126,6 @@ class Request implements RequestInterface {
 
     public function getPath() {
         return $this->path;
-    }
-
-    public function setRoutingKey($routing_key) {
-
-        if ( isset($this->params[$routing_key]) )
-            $this->path = $this->params[$routing_key];
-        else
-            throw new PrismException('Routing key is wrong.');
-        unset($this->params[$routing_key]);
-
     }
 
     // query to array

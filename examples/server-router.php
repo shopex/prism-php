@@ -1,13 +1,16 @@
 <?php
 // 先起服务器 php -S 0.0.0.0:8080 server.php
 require_once(__DIR__.'/../src/PrismServer.php');
+require_once(__DIR__.'/../middlewares/EcosSign.php');
+require_once(__DIR__.'/../middlewares/Logger.php');
 
 
 $server = new PrismServer(); // 创建服务端实例
 
-// $server->setRoutingKey('method'); // 利用请求参数进行分发时设置routing key
+//$server->setRoutingKey('method'); // 利用请求参数进行分发时设置routing key
 
-// $server->setValidator('method');
+$server->uses('EcosSign@validate'); // 使用Ecos的验签middleware来验证前面
+$server->uses('Logger@show'); // 使用Ecos的验签middleware来验证前面
 
 /**
 * $path:            路由地址(path)
@@ -15,6 +18,7 @@ $server = new PrismServer(); // 创建服务端实例
 * $require_oauth:   是否需要oauth验证(默认为false)
 */
 $server->get('/get_list', 'AppleStore@getList', true);
+//$server->post('get_list', 'AppleStore@getList', true);
 
 
 class AppleStore {
@@ -23,6 +27,7 @@ class AppleStore {
 
         $params = $request->getParams();
         // $params = 'category' => 'mac'
+        // print_r($params);
 
         $store = array(
             'mac' => array('macbook', 'macbook pro', 'macbook air'),
