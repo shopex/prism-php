@@ -25,8 +25,13 @@ $client->access_token = 'c4t6q5rh6fysu5v5ww5xenv4';
 
 // 通过category获取AppleStore产品列表 (GET请求)
 $params = array(
-	'category' =>'mac',
+    'method' =>'get_list',
+	'category' =>'mac'
 );
-$r = $client->put('/university/student', $params, $headers);
+
+
+// /api名称/methodID或path
+//$r = $client->put('/university/student', $params, $headers);
+$r = $client->get('/apple_store', $params, $headers);
 echo $r."\n";
 // {"jsonrpc":"2.0","result":["macbook","macbook pro","macbook air"],"id":"4v3zjybwynqfenmx"}

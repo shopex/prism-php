@@ -5,12 +5,14 @@ require_once(__DIR__.'/../src/PrismServer.php');
 
 $server = new PrismServer(); // 创建服务端实例
 
+$server->setRoutingKey('methoda');
+
 /**
 * $path:            路由地址(path)
 * $handler:         类名@方法名
 * $require_oauth:   是否需要oauth验证(默认为false)
 */
-$server->delete('/student', 'AppleStore@getList', true);
+$server->get('get_list', 'AppleStore@getList', true);
 
 
 class AppleStore {

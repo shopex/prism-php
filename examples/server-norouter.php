@@ -8,7 +8,7 @@ $server = new PrismServer(); // 创建服务端实例
 /**
 * $handler:         类名@方法名
 * $require_oauth:   是否需要oauth验证(默认为false)
-* $request:         可以使用实现了PrismRequest接口的Request对象
+* $request:         可以使用实现了PrismRequest接口的Request对象,这样就能伪造请求了
 */
 $server->dispatch('AppleStore@getList', false);
 

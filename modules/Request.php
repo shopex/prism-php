@@ -57,6 +57,9 @@ class Request implements RequestInterface {
         if ( isset($url_arr['query']) )
             $this->query = $this->queryToArray($url_arr['query']);
 
+        // prepare params
+        $this->params = array_merge($this->query, $this->post_data);
+
         // prepare post_data
         $this->post_data = $this->queryToArray(file_get_contents('php://input'));
 
@@ -93,7 +96,7 @@ class Request implements RequestInterface {
     }
 
     public function getParams() {
-        return array_merge($this->query, $this->post_data);
+        return $this->params;
     }
 
     public function getRequestID() {
@@ -122,6 +125,14 @@ class Request implements RequestInterface {
 
     public function getPath() {
         return $this->path;
+    }
+
+    public function setRoutingKey($routing_key) {
+        if ( isset($this->params[$routing_key]) )
+            $this->path = $this->params[$routing_key];
+        else
+            throw new PrismException('Routing key is wrong.');
+        unset($this->params[$routing_key]);
     }
 
     // query to array

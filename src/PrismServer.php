@@ -19,14 +19,23 @@ interface PrismServerInterface {
 
     // 把请求分发到处理类的方法
     public function dispatch($handler, $require_oauth);
+
+    // 设置Routing Key(methodID的键名)
+    public function setRoutingKey($routing_key);
 }
 
+
 class PrismServer implements PrismServerInterface {
+
+    private $routing_key;
 
     // GET路由方法
     public function get($path, $handler, $require_oauth = false) {
 
         $request = new Request();
+
+        if ($this->routing_key)
+            $request->setRoutingKey($this->routing_key);
 
         if ($request->getMethod() != 'GET')
             return;
@@ -43,6 +52,9 @@ class PrismServer implements PrismServerInterface {
 
         $request = new Request();
 
+        if ($this->routing_key)
+            $request->setRoutingKey($this->routing_key);
+
         if ($request->getMethod() != 'POST')
             return;
 
@@ -58,6 +70,9 @@ class PrismServer implements PrismServerInterface {
 
         $request = new Request();
 
+        if ($this->routing_key)
+            $request->setRoutingKey($this->routing_key);
+
         if ($request->getMethod() != 'PUT')
             return;
 
@@ -72,6 +87,9 @@ class PrismServer implements PrismServerInterface {
     public function delete($path, $handler, $require_oauth = false) {
 
         $request = new Request();
+
+        if ($this->routing_key)
+            $request->setRoutingKey($this->routing_key);
 
         if ($request->getMethod() != 'DELETE')
             return;
@@ -107,6 +125,13 @@ class PrismServer implements PrismServerInterface {
         // 执行方法
         call_user_func(array(new $class_name, $action_name), $request, $response);
 
+    }
+
+    public function setRoutingKey($routing_key) {
+        if (is_string($routing_key))
+            $this->routing_key = $routing_key;
+        else
+            throw PrismException('Routing key must be string.');
     }
 
 }
