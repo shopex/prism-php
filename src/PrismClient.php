@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../modules/Socket.php');
 require_once(__DIR__ . '/../modules/PrismSign.php');
 require_once(__DIR__ . '/../modules/PrismException.php');
 
-Class Prism extends Notify {
+Class PrismClient extends Notify {
 
     public $base_url; //platform地址
     public $app_key; // key/clientID

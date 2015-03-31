@@ -24,7 +24,7 @@ class SocketTest extends TestBase  {
         $this->assertTrue( is_string($this->client_id) );
         $this->assertTrue( is_string($this->secret) );
 
-        $this->client = new Prism($this->local_url, $this->client_id, $this->secret);
+        $this->client = new PrismClient($this->local_url, $this->client_id, $this->secret);
 
         $this->assertTrue( is_object($this->client) );
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../src/Prism.php');
+require_once(__DIR__ . '/../src/PrismClient.php');
 
 class TestBase extends PHPUnit_Framework_TestCase {
 

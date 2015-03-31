@@ -30,7 +30,7 @@ class CurlTest extends TestBase  {
         );
         $secret = $this->secret;
 
-        $r = Sign::produce($method, $path, $headers, $query, $postData, $secret);
+        $r = PrismSign::produce($method, $path, $headers, $query, $postData, $secret);
 
         $this->assertEquals(32, strlen($r));
 

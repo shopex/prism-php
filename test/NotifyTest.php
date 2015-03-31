@@ -16,7 +16,7 @@ require_once(__DIR__ . '/TestBase.php');
 class CurlTest extends TestBase  {
 
     function setUp() {
-        $this->client = new Prism($this->remote_url, $this->client_id, $this->secret);
+        $this->client = new PrismClient($this->remote_url, $this->client_id, $this->secret);
     }
 
     public function testPublish() {
