@@ -1,6 +1,6 @@
 <?php
 // 执行Ecos的验证签名
-class EcosSign {
+class EcosValidator {
 
     public function validate($request, $response) {
 
