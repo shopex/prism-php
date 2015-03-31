@@ -141,6 +141,7 @@ class PrismServer implements PrismServerInterface {
 
     }
 
+    // 设置Routing Key(methodID的键名)
     public function setRoutingKey($routing_key) {
         if (is_string($routing_key))
             $this->routing_key = $routing_key;
@@ -148,6 +149,7 @@ class PrismServer implements PrismServerInterface {
             throw PrismException('Routing key must be string.');
     }
 
+    // 注册middleware
     public function uses ($handler) {
         $this->middlewares[] = $handler;
     }
