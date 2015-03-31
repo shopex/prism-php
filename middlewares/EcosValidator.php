@@ -10,7 +10,7 @@ class EcosValidator {
 
 
         // 输入参数和Token进行校验
-        if ( $sign == EcosSign::sign($request->params, '123456') )
+        if ( $sign == EcosValidator::sign($request->params, '123456') )
             return;
         else
             $response->setError('Invalid Request', 'Sign is not valid.')->send();
