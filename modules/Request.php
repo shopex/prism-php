@@ -66,31 +66,29 @@ class Request implements RequestInterface {
 
         // prepare headers
         foreach($_SERVER as $key=>$value) {
-            if ( substr($key, 0, 7) == 'HTTP_X_')
-                $this->headers[str_replace('HTTP_X_', '', $key)] = $value;
+            if ( substr($key, 0, 5) == 'HTTP_')
+                $this->headers[str_replace('HTTP_', '', $key)] = $value;
         }
 
-        if ( isset($this->headers['API_ARG']) ) {
-            parse_str($this->headers['API_ARG'], $this->app_info);
-            unset($this->headers['API_ARG']);
+        if ( isset($this->headers['X_API_ARG']) ) {
+            parse_str($this->headers['X_API_ARG'], $this->app_info);
+//            unset($this->headers['X_API_ARG']);
         }
 
-        if ( isset($this->headers['API_OAUTH']) ) {
-            parse_str($this->headers['API_OAUTH'], $this->oauth_info);
-            unset($this->headers['API_OAUTH']);
+        if ( isset($this->headers['X_API_OAUTH']) ) {
+            parse_str($this->headers['X_API_OAUTH'], $this->oauth_info);
+//            unset($this->headers['X_API_OAUTH']);
         }
 
-        if ( isset($this->headers['CALLER_IP']) ) {
-            $this->caller_ip = $this->headers['CALLER_IP'];
-            unset($this->headers['CALLER_IP']);
+        if ( isset($this->headers['X_CALLER_IP']) ) {
+            $this->caller_ip = $this->headers['X_CALLER_IP'];
+//            unset($this->headers['X_CALLER_IP']);
         }
 
-        if ( isset($this->headers['REQUEST_ID']) ) {
-            $this->request_id = $this->headers['REQUEST_ID'];
-            unset($this->headers['REQUEST_ID']);
+        if ( isset($this->headers['X_REQUEST_ID']) ) {
+            $this->request_id = $this->headers['X_REQUEST_ID'];
+//            unset($this->headers['X_REQUEST_ID']);
         }
-
-//        print_r($_SERVER);die;
 
         $this->localFix();
 
@@ -126,6 +124,14 @@ class Request implements RequestInterface {
 
     public function getPath() {
         return $this->path;
+    }
+
+    public function getQuery() {
+        return $this->query;
+    }
+
+    public function getPostData() {
+        return $this->post_data;
     }
 
     // query to array
