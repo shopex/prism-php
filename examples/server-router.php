@@ -2,7 +2,6 @@
 // 先起服务器 php -S 0.0.0.0:8080 server.php
 require_once(__DIR__.'/../src/PrismServer.php');
 require_once(__DIR__.'/../middlewares/EcosValidator.php');
-require_once(__DIR__.'/../middlewares/PrismValidator.php');
 require_once(__DIR__.'/../middlewares/Logger.php');
 
 
@@ -10,8 +9,7 @@ $server = new PrismServer(); // 创建服务端实例
 
 //$server->setRoutingKey('method'); // 利用请求参数进行分发时设置routing key
 
-$server->uses('EcosValidator@validate'); // 使用Ecos的验签middleware来验证前面
-//$server->uses('PrismValidator@validate'); // 使用Prism的验签middleware来验证前面
+$server->uses('EcosValidator@validate'); // 使用Ecos的验签middleware来验证
 $server->uses('Logger@show'); // 使用Logger来记录日志
 
 /**
@@ -34,7 +32,6 @@ class AppleStore {
 
         $params = $request->getParams();
         // $params = 'category' => 'mac'
-        // print_r($params);
 
         $store = array(
             'mac' => array('macbook', 'macbook pro', 'macbook air'),
