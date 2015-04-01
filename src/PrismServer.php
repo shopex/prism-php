@@ -18,13 +18,13 @@ interface PrismServerInterface {
     public function delete($path, $handler, $require_oauth);
 
     // 把请求分发到处理类的方法
-    public function dispatch($handler, $require_oauth);
+    public function dispatch($handler, $require_oauth, $request);
 
     // 设置Routing Key(methodID的键名)
     public function setRoutingKey($routing_key);
 
     // 注册middleware
-    public function uses ($middleware);
+    public function uses($middleware);
 }
 
 
