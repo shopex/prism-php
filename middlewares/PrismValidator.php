@@ -10,7 +10,7 @@ class PrismValidator {
         $sign = $request->params['sign'];
         unset($request->params['sign']);
 
-//        var_dump($sign);
+        var_dump($sign);
 
         $http_method  = $request->getMethod();
         $path         = $request->getPath();
@@ -26,9 +26,9 @@ class PrismValidator {
 //            $new_headers[str_replace('_', '-', $key)] = $value;
 //        }
 
-        print_r($new_headers);
+//        print_r($new_headers);
 
-        echo PrismSign::produce($http_method, $path, $new_headers, $query, $postData, $app_secret);
+        echo PrismSign::produce($http_method, $path, $headers, $query, $postData, $app_secret);
         die;
 
         // 输入参数和Token进行校验
