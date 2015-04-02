@@ -5,3 +5,4 @@
 
 
 ## Release Notes ##
+2015-04-02 修复了Client params 传递 null, false, 0时验签失败的bug，更改了false和null的PHP签名方法。
