@@ -5,4 +5,3 @@
 
 
 ## Release Notes ##
-2015-4-2 params里只能传递字符串和数字
