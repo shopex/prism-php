@@ -6,6 +6,15 @@ class Requester {
     */
     protected function createRequest ($http_method, $path, $headers = array(), $params = null) {
 
+        // 去除params里的不是字符串或数字的参数
+        function filtering($v) {
+            if (is_string($v) || is_numeric($v) || is_long($v))
+                return true;
+            return false;
+        }
+
+        $params = array_filter($params, 'filtering');
+
         // 获取完整URL信息
         $url = $this->base_url .'/'. ltrim($path, '/');
 
