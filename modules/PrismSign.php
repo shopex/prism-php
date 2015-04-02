@@ -44,10 +44,10 @@ class PrismSign {
             ksort($params);
             $result = array();
             foreach($params as $key=>$value){
-                if (null == $value) {
-                   $value = '';
-                }
-                $result[] = $key.'='.$value;
+                if ($value === false)
+                    $value = 0;
+                if ($value !== null)
+                    $result[] = $key.'='.$value;
             }
             return implode('&', $result);
         }
