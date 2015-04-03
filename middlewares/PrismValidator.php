@@ -10,8 +10,6 @@ class PrismValidator {
         $sign = $request->params['sign'];
         unset($request->params['sign']);
 
-        var_dump($sign);
-
         $http_method  = $request->getMethod();
         $path         = $request->getPath();
         $headers      = $request->getHeaders();
