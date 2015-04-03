@@ -18,21 +18,12 @@ class PrismValidator {
         $query        = $request->getQuery();
         $postData     = $request->getPostData();
         $app_info     = $request->getAppInfo();
-        $app_secret   = $app_info['client_id'];
+        $app_secret   = '';
 
-        $new_headers = array();
-
-//        foreach ($headers as $key => $value) {
-//            $new_headers[str_replace('_', '-', $key)] = $value;
-//        }
-
-//        print_r($new_headers);
-
-        echo PrismSign::produce($http_method, $path, $headers, $query, $postData, $app_secret);
-        die;
+        unset($query['sign']);
 
         // 输入参数和Token进行校验
-        if ( $sign == EcosSign::sign($request->params, '123456') )
+        if ( $sign == PrismSign::produce($http_method, $path, $headers, $query, $postData, $app_secret) )
             return;
         else
             $response->setError('Invalid Request', 'Sign is not valid.')->send();
