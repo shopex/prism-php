@@ -5,22 +5,24 @@ require_once(__DIR__.'/../src/PrismClient.php');
 // php -S 0.0.0.0:8080 test/testserver.php
 
 // 新建对象 填入在Prism平台上注册的信息 本地测试的话随意填写就行了
-$client = new PrismClient($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+//$client = new PrismClient($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+$client = new PrismClient($url = 'http://192.168.10.234:1234/api', $key = '5xh25gev', $secret = 'ca3ohxo4rgsondmkgpzy');
 //$client = new PrismClient($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
 // 准备一些自定义Header信息
 $headers = array(
-    'X_API_TEST1' => 'A',
-    'X_API_TEST2' => 'B'
+    'X-Api-Test1' => 'A',
+    'X-Api-Test2' => 'B'
 );
 
 // 可以设置使用CURL还是SOCKET请求方式，默认会优先调用CURL方法
-$client->setRequester('socket');
-//$client->setRequester('curl');
+//$client->setRequester('socket');
+$client->setRequester('curl');
 
 
 // 可以携带Oauth的Access Token
-$client->access_token = 'c4t6q5rh6fysu5v5ww5xenv4';
+//$client->access_token = 'c4t6q5rh6fysu5v5ww5xenv4';
+$client->access_token = 'npzgkybqx2zrir6hdzjghrwp';
 
 
 // 通过category获取AppleStore产品列表 (GET请求) 利用path进行分 /api/path
