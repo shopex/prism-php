@@ -65,32 +65,19 @@ class Request implements RequestInterface {
         $this->params = array_merge($this->query, $this->post_data);
 
         // prepare headers
-        foreach($_SERVER as $key=>$value) {
-            if ( substr($key, 0, 5) == 'HTTP_')
-                $this->headers[str_replace('HTTP_', '', $key)] = $value;
-        }
+        $this->headers = $this->parseRequestHeaders();
 
-        if ( isset($this->headers['X_API_ARG']) ) {
-            parse_str($this->headers['X_API_ARG'], $this->app_info);
-//            unset($this->headers['X_API_ARG']);
-        }
+        if ( isset($this->headers['X-Api-Arg']) )
+            parse_str($this->headers['X-Api-Arg'], $this->app_info);
 
-        if ( isset($this->headers['X_API_OAUTH']) ) {
-            parse_str($this->headers['X_API_OAUTH'], $this->oauth_info);
-//            unset($this->headers['X_API_OAUTH']);
-        }
+        if ( isset($this->headers['X-Api-Oauth']) )
+            parse_str($this->headers['X-Api-Oauth'], $this->oauth_info);
 
-        if ( isset($this->headers['X_CALLER_IP']) ) {
-            $this->caller_ip = $this->headers['X_CALLER_IP'];
-//            unset($this->headers['X_CALLER_IP']);
-        }
+        if ( isset($this->headers['X-Caller-Ip']) )
+            $this->caller_ip = $this->headers['X-Caller-Ip'];
 
-        if ( isset($this->headers['X_REQUEST_ID']) ) {
-            $this->request_id = $this->headers['X_REQUEST_ID'];
-//            unset($this->headers['X_REQUEST_ID']);
-        }
-
-//        $this->localFix();
+        if ( isset($this->headers['X-Request-Id']) )
+            $this->request_id = $this->headers['X-Request-Id'];
 
     }
 
@@ -160,23 +147,20 @@ class Request implements RequestInterface {
         return empty($result) ? false : $result;
     }
 
-    // local fix 单元测试时本地连接本地(不经过Prism服务器)时使用
-    private function localFix () {
+    // 修复http headers
+    function parseRequestHeaders() {
 
-        if ($this->remote_arr != '127.0.0.1')
-            return;
+        $headers = array();
 
-        // 清理path
-        $this->path = preg_replace("/^\/[^\/]+\/[^\/]+/", '', $this->path);
+        foreach($_SERVER as $key => $value) {
+            if (substr($key, 0, 5) <> 'HTTP_') {
+                continue;
+            }
+            $header = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
+            $headers[$header] = $value;
+        }
 
-        // 清理params
-        unset($this->params['client_id']);
-        unset($this->params['sign_method']);
-        unset($this->params['sign_time']);
-        unset($this->params['sign']);
-
-        // requestid
-        $this->request_id = '7dukfu4ssxrfugvd';
+        return $headers;
 
     }
 
