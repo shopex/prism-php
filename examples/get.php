@@ -8,7 +8,6 @@ require_once(__DIR__.'/../src/PrismClient.php');
 
 // 新建对象 填入在Prism平台上注册的信息 本地测试的话随意填写就行了
 $client = new PrismClient($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
-//$client = new PrismClient($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
 
 // 发起请求
