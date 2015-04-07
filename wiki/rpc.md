@@ -44,4 +44,3 @@
 
 	$client->access_token = 'c4t6q5rh6fysu5v5ww5xenv4';
 
-[返回](home)

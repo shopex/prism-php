@@ -49,4 +49,9 @@
         [error] => 
     )
 
+## 带着获取到的Token访问API
+
+	$client->access_token = 'nkmabee4wxmhgjsqbeo2eg4g';
+	$client->post('/apple_store');
+
  
