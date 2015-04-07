@@ -2,8 +2,6 @@
 require_once(__DIR__.'/../src/PrismClient.php');
 
 //$client = new Prism($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
-$client = new PrismClient($url = 'http://192.168.10.234:1234/api', $key = '5xh25gev', $secret = 'ca3ohxo4rgsondmkgpzy');
-//$client = new Prism($url = 'http://127.0.0.1:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
 
 echo '<pre>';
 // 跳转到登录页面获取Token (需要在CGI环境下)
