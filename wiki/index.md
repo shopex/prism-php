@@ -17,7 +17,7 @@
 PHP Prism SDK下载后直接使用无需安装，目前没有PHP版本要求。 (如果你要使用到所有功能，那么需要Apache或Nginx等HTTP Server支持
 
 ## Prism Client 用法 ##
-- [快速开始](https://git.ishopex.cn/prism-sdk/prism-php/blob/0.3/wiki/get.md)
+- [快速开始](get.md)
 - [详细请求方法GET/POST/PUT/DELETE](rpc)
 - [Oauth认证](oauth)
 - [Notify](notify)

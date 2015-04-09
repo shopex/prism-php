@@ -1,7 +1,7 @@
 ## Prsim PHP SDK ##
 实现Shopex Prism 的PHP版SDK供第三方使用
 
-[文档](/wiki/rpc.md)
+[文档](/wiki/index.md)
 
 
 ## Release Notes ##
