@@ -1,0 +1,21 @@
+{
+    "name": "shopex/prism",
+    "description": "SDK for shopex prism platform",
+    "keywords": ["shopex", "prism", "api"],
+    "homepage": "http://github.com/shopex/prism-php",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Wanglei",
+            "email": "flaboy@shopex.cn",
+            "homepage": "http://www.shopex.cn/"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0"
+    },
+    "autoload": {
+        "classmap": ["lib/"]
+    }
+}
