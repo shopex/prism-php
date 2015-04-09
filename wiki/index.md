@@ -18,11 +18,11 @@ PHP Prism SDK下载后直接使用无需安装，目前没有PHP版本要求。 
 
 ## Prism Client 用法 ##
 - [快速开始](get.md)
-- [详细请求方法GET/POST/PUT/DELETE](rpc.md))
-- [Oauth认证](oauth.md))
-- [Notify](notify.md))
+- [详细请求方法GET/POST/PUT/DELETE](rpc.md)
+- [Oauth认证](oauth.md)
+- [Notify](notify.md)
 
 
 ## Prism Server 用法 ##
-- [带路由的Server](server-router.md))
-- [不带路由的Server](server-norouter.md))
+- [带路由的Server](server-router.md)
+- [不带路由的Server](server-norouter.md)
