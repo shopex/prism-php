@@ -7,10 +7,10 @@ require_once(__DIR__.'/../src/PrismClient.php');
 
 
 // 新建对象 填入在Prism平台上注册的信息 本地测试的话随意填写就行了
-$client = new PrismClient($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+$client = new PrismClient($url = 'http://default.local:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj', "unix:///tmp/api_provider.sock");
 
 
 // 发起请求
-echo $client->get('/apple_store/ping');
-
+$r = $client->get('/fire/get');
+var_dump($r);
 // 返回: pong

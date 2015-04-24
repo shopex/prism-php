@@ -13,6 +13,7 @@ Class PrismClient extends Notify {
     public $base_url; //platform地址
     public $app_key; // key/clientID
     public $app_secret; // secret
+    private $socket;
 
     public $access_token; // access_token
     public $http; // http包
@@ -20,16 +21,21 @@ Class PrismClient extends Notify {
     public $client; //prism对象
     public $oauth; //oauth对象
 
-    function __construct($base_url, $app_key, $app_secret) {
+    function __construct($base_url, $app_key, $app_secret, $socket=null) {
 
         $this->base_url   = rtrim($base_url, '/');
         $this->app_key    = $app_key;
         $this->app_secret = $app_secret;
+        $this->socket = $socket;
 
-        if (extension_loaded('curl'))
-            $this->http = new Curl();
-        else
-            $this->http = new Socket();
+        if ($socket!=null) {
+            $this->http = new Socket( $socket );
+        } else {
+            if (extension_loaded('curl'))
+                $this->http = new Curl();
+            else
+                $this->http = new Socket();
+        }
 
     }
 

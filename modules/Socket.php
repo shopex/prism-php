@@ -1,5 +1,11 @@
 <?php
 class Socket {
+    private $socket;
+    function __construct($socket=null) {
+        if ($socket!=null) {
+            $this->socket = $socket;
+        }
+    }
 
     public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
 
@@ -24,7 +30,11 @@ class Socket {
 
 
         // 新建Socket资源
-        $fp = @fsockopen($scheme . $ip, $port, $errno, $errstr, 30);
+        if ($this->socket) {
+            $fp = fsockopen($this->socket);
+        } else {
+            $fp = @fsockopen($scheme . $ip, $port, $errno, $errstr, 30);
+        }
 
         if (!$fp)
             throw new Exception($errstr);
