@@ -141,7 +141,7 @@ class Request implements RequestInterface {
         foreach (explode('&', $query) as $couple) {
             list ($key, $val) = explode('=', $couple);
             $key = str_replace("+", " ", $key); // key里的+转换成空格
-            $result[$key] = $val;
+            $result[$key] = urldecode($val); // 增加urldecode
         }
 
         return empty($result) ? false : $result;
