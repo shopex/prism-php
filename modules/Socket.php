@@ -85,8 +85,15 @@ class Socket {
         $response['Header'] = $this->parse_http_header($response['Header']);
 
         if (isset($response["Header"]["Transfer-Encoding"]) && $response["Header"]["Transfer-Encoding"]=="chunked") {
-            $p = strpos($response['Body'], "\r\n");
-            $response['Body'] = substr($response['Body'], $p+2);
+            $body = $response['Body'];
+            $response['Body'] = "";
+            while(true){
+                $p = strpos($body, "\r\n");
+                $n = (int)(substr($body, 0, $p));
+                if ($n==0) break;
+                $response['Body'] .= substr($body, $p+2, $n);
+                $body = substr($body, $p+2+n);
+            }
         }
         return $response['Body'];
     }
