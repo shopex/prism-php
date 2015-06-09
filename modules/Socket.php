@@ -89,10 +89,10 @@ class Socket {
             $response['Body'] = "";
             while(true){
                 $p = strpos($body, "\r\n");
-                $n = (int)(substr($body, 0, $p));
+                $n = hexdec(substr($body, 0, $p));
                 if ($n==0) break;
                 $response['Body'] .= substr($body, $p+2, $n);
-                $body = substr($body, $p+2+n);
+                $body = substr($body, $p+2 + $n+2);
             }
         }
         return $response['Body'];
