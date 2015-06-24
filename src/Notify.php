@@ -73,14 +73,20 @@ class Notify extends Oauth {
     }
 
 
-    public function consume () {
+    public function consume ($topic = "") {
 
         if (!$this->websocket)
             $this->connectNotify();
 
         // 发请求
         if (!$this->consuming) {
-            fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionConsume , '') ) );
+            $size_topic = strlen($topic);
+            $data = pack(
+                "na*",
+                $size_topic,
+                $topic
+            );
+            fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionConsume , $data) ) );
             $this->consuming = true;
         }
 
