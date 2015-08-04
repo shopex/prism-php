@@ -4,11 +4,11 @@ class Oauth extends Requester {
     /**
     * OAUTH
     */
-    public function oauth($redirect = null) {
+    public function oauth($redirect = null, $user_params = array()) {
 
         // 跳转到验证页面 获取Token提取码(code)
         if(@!$_GET['code'])
-            $this->goToAuthPage($redirect);
+            $this->goToAuthPage($redirect, $user_params);
         // 提交code获取token
         else
             $token = $this->getToken($_GET['code']);
@@ -75,7 +75,7 @@ class Oauth extends Requester {
     /**
     * 跳转到验证页面
     */
-    public function goToAuthPage($redirect = null) {
+    public function goToAuthPage($redirect = null, $user_params = array()) {
 
         $params = array(
             'response_type' => 'code',
@@ -87,8 +87,9 @@ class Oauth extends Requester {
         else
             $params['redirect_uri'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
+        $params = array_merge($params, $user_params);
         header('Location: ' . str_replace('/api', '', $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params));
-
+        exit;
     }
 
     /**
