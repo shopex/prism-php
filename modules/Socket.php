@@ -12,7 +12,7 @@ class Socket {
         // 准备参数
         $url_arr  = parse_url($url);
         $host     = $url_arr['host'];
-        $port     = $url_arr['port'];
+        $port     = (isset($url_arr['port'])) ? $url_arr['port'] : 80;
         $path     = $url_arr['path'];
         $query    = $url_arr['query'];
 
