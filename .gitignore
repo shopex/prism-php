@@ -4,3 +4,5 @@
 test/report
 /Diagram.pptx
 /Plan.xlsx
+*.swp
+*.swo
