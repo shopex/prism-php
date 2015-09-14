@@ -5,6 +5,7 @@ class Notify extends Oauth {
     var $last_buf   = '';
     var $messages   = array();
     var $consuming  = false;
+    var $_retry = 0;
 
     const actionPublish = 0x01;
     const actionConsume = 0x02;
@@ -15,6 +16,8 @@ class Notify extends Oauth {
     const CloseFrame    = 0x08;
     const PingFrame     = 0x09;
     const PongFrame     = 0x09;
+
+    const MaxRetry = 100;
 
     public function connectNotify () {
 
@@ -29,6 +32,12 @@ class Notify extends Oauth {
 
         $this->setRequester('socket');
         $this->websocket = $this->get('/platform/notify', '', $headers);
+
+        if( is_resource($this->websocket)) {
+            $this->_retry = 0;
+        } else {
+            $this->_retry++;
+        }
 
         $header1 = fgets($this->websocket, 512);
         $header2 = fgets($this->websocket, 512);
@@ -92,7 +101,17 @@ class Notify extends Oauth {
 
         // 获取结果
         while ( !isset($this->messages[0]) ) {
-            $this->recvMessage();
+            try {
+                $this->recvMessage();
+            } catch(Exception $e) {
+                if ($this->_retry > self::MaxRetry) {
+                    throw new Exception("The connection fails too much, Please check Client's config");
+                } else {
+                    $this->closeNotify();
+                    $this->connectNotify();
+                }
+
+            }
         }
 
         return array_shift($this->messages);
@@ -144,6 +163,10 @@ class Notify extends Oauth {
     }
 
     private function recvMessage(){
+        if(!is_resource($this->websocket) || feof($this->websocket)) {
+            throw new Exception("websocket is closed");
+        }
+
         $raw = fread($this->websocket, 8192);
 
         $raw = $this->last_buf . $raw;
