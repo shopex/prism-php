@@ -49,6 +49,9 @@ class Notify extends Oauth {
     }
 
     public function closeNotify () {
+        $this->last_buf = '';
+        $this->messages = array();
+        $this->consume = false;
         fwrite($this->websocket, $this->encode(self::CloseFrame));
         fclose($this->websocket);
     }
@@ -109,6 +112,14 @@ class Notify extends Oauth {
                 } else {
                     $this->closeNotify();
                     $this->connectNotify();
+                    $size_topic = strlen($topic);
+                    $data = pack(
+                        "na*",
+                        $size_topic,
+                        $topic
+                    );
+                    fwrite($this->websocket, $this->encode( self::BinaryFrame, pack("ca*", self::actionConsume , $data) ) );
+                    $this->consuming = true;
                 }
 
             }
