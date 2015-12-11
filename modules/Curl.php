@@ -23,6 +23,9 @@ class Curl {
 
         // 设置UserAgent
         curl_setopt($curl, CURLOPT_USERAGENT, 'PrismSDK/PHP');
+        
+        // 设置ssl的版本
+        curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
         // 添加Header
         $header_arr = array();
