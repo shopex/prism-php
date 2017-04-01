@@ -8,6 +8,8 @@ require_once(__DIR__ . '/../modules/Socket.php');
 require_once(__DIR__ . '/../modules/PrismSign.php');
 require_once(__DIR__ . '/../modules/PrismException.php');
 
+namespace Shopex\Prism;
+
 Class PrismClient extends Notify {
 
     public $base_url; //platform地址

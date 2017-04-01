@@ -3,6 +3,8 @@ require_once(__DIR__ . '/../modules/Request.php');
 require_once(__DIR__ . '/../modules/Response.php');
 require_once(__DIR__ . '/../modules/PrismException.php');
 
+namespace Shopex\Prism;
+
 interface PrismServerInterface {
 
     // GET路由方法

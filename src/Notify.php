@@ -1,4 +1,7 @@
 <?php
+
+namespace Shopex\Prism;
+
 class Notify extends Oauth {
 
     var $websocket;
