@@ -1,4 +1,7 @@
 <?php
+namespace Shopex\Prism;
+
+
 require_once(__DIR__ . '/Requester.php');
 require_once(__DIR__ . '/Oauth.php');
 require_once(__DIR__ . '/Notify.php');
@@ -7,8 +10,6 @@ require_once(__DIR__ . '/../modules/Curl.php');
 require_once(__DIR__ . '/../modules/Socket.php');
 require_once(__DIR__ . '/../modules/PrismSign.php');
 require_once(__DIR__ . '/../modules/PrismException.php');
-
-namespace Shopex\Prism;
 
 Class PrismClient extends Notify {
 
