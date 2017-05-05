@@ -1,5 +1,4 @@
 <?php
-namespace Shopex\Prism;
 
 
 require_once(__DIR__ . '/Requester.php');

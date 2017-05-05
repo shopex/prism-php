@@ -1,6 +1,5 @@
 <?php
 
-namespace Shopex\Prism;
 
 class Requester {
 
