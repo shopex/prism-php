@@ -9,6 +9,7 @@ require_once(__DIR__ . '/../modules/Curl.php');
 require_once(__DIR__ . '/../modules/Socket.php');
 require_once(__DIR__ . '/../modules/PrismSign.php');
 require_once(__DIR__ . '/../modules/PrismException.php');
+require_once(__DIR__ . '/../modules/PrismClientUtil.php');
 
 Class PrismClient extends Notify {
 
@@ -16,6 +17,7 @@ Class PrismClient extends Notify {
     public $app_key; // key/clientID
     public $app_secret; // secret
     private $socket;
+    public $is_sand_box;
 
     public $access_token; // access_token
     public $http; // http包
@@ -29,6 +31,15 @@ Class PrismClient extends Notify {
         $this->app_key    = $app_key;
         $this->app_secret = $app_secret;
         $this->socket = $socket;
+
+        if(strstr($base_url, PrismClientUtil::SANDBOXAPIURL))
+        {
+            $this->is_sand_box = true;
+        }
+        else
+        {
+            $this->is_sand_box = false;
+        }
 
         if ($socket!=null) {
             $this->http = new Socket( $socket );

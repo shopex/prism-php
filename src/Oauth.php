@@ -83,6 +83,8 @@ class Oauth extends Requester {
             'response_type' => 'code',
             'client_id' => $this->app_key,
         );
+        if($this->is_sand_box)
+            $params['sandbox'] = true;
 
         if ($redirect)
             $params['redirect_uri'] = $redirect;
@@ -90,7 +92,10 @@ class Oauth extends Requester {
             $params['redirect_uri'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
         $params = array_merge($params, $user_params);
-        header('Location: ' . str_replace('/api', '', $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params));
+
+
+        $aim_str = $this->is_sand_box ? PrismClientUtil::SANDBOXAPIURL : PrismClientUtil::APIURL;
+        header('Location: ' . str_replace($aim_str, '', $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params));
         exit;
     }
 
@@ -99,29 +104,33 @@ class Oauth extends Requester {
     */
     public function logout($redirect_uri = null) {
 
+        $aim_str = $this->is_sand_box ? PrismClientUtil::SANDBOXAPIURL : PrismClientUtil::APIURL;
         if ($redirect_uri) {
             $params = array(
                 'redirect_uri' => $redirect_uri,
             );
-            header("Location: ". str_replace('/api', '', $this->base_url) . '/oauth/logout' . '?' . http_build_query($params));
+            header("Location: ". str_replace($aim_str, '', $this->base_url) . '/oauth/logout' . '?' . http_build_query($params));
         } else {
-            header("Location: ". str_replace('/api', '', $this->base_url). '/oauth/logout');
+            header("Location: ". str_replace($aim_str, '', $this->base_url). '/oauth/logout');
         }
 
     }
 
-    
+
     public function getAuthUrl($redirect = null) {
         $params = array(
             'response_type' => 'code',
             'client_id' => $this->app_key,
         );
+        if($this->is_sand_box)
+            $params['sandbox'] = true;
 
         if ($redirect)
             $params['redirect_uri'] = $redirect;
         else
             $params['redirect_uri'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-        return  str_replace('/api', '', $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params);
+        $aim_str = $this->is_sand_box ? PrismClientUtil::SANDBOXAPIURL : PrismClientUtil::APIURL;
+        return  str_replace($aim_str, $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params);
     }
 
 }

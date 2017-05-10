@@ -12,7 +12,10 @@ class Requester {
         $url = $this->base_url .'/'. ltrim($path, '/');
 
         if (substr($path, 0, 6) == '/oauth') // oauth url fix
-            $url = str_replace('/api', '', $url);
+        {
+            $aim_str = $this->is_sand_box ? PrismClientUtil::SANDBOXAPIURL : PrismClientUtil::APIURL;
+            $url = str_replace($aim_str, '', $url);
+        }
 
         $url_arr = parse_url($url);
 
