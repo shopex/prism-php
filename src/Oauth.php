@@ -130,7 +130,7 @@ class Oauth extends Requester {
         else
             $params['redirect_uri'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $aim_str = $this->is_sand_box ? PrismClientUtil::SANDBOXAPIURL : PrismClientUtil::APIURL;
-        return  str_replace($aim_str, $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params);
+        return  str_replace($aim_str, '', $this->base_url) . '/oauth/authorize'.'?'.http_build_query($params);
     }
 
 }
