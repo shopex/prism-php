@@ -6,7 +6,7 @@ class Oauth extends Requester {
     /**
     * OAUTH
     */
-    public function oauth($redirect = null, $user_params = array()) {
+    public function __contruct($redirect = null, $user_params = array()) {
 
         // 跳转到验证页面 获取Token提取码(code)
         if(@!$_GET['code'])
