@@ -6,7 +6,7 @@ class Requester {
     /**
     * 发起请求
     */
-    protected function createRequest ($http_method, $path, $headers = array(), $params = null) {
+    protected function createRequest ($http_method, $path, $headers = array(), $params = null, $config = array()) {
 
         // 获取完整URL信息
         $url = $this->base_url .'/'. ltrim($path, '/');
@@ -66,7 +66,7 @@ class Requester {
         $final_url = preg_replace("/\?.*/", '', $url) . '?' . http_build_query($query);
 
         // 发起请求 CURL/SOCKET
-        return $this->http->sendRequest($http_method, $final_url, $headers, $postData);
+        return $this->http->sendRequest($http_method, $final_url, $headers, $postData, $config);
 
     }
 

@@ -1,7 +1,7 @@
 <?php
 class Curl {
 
-    public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
+    public function sendRequest($http_method = 'GET', $url, $headers, $postData = null, $config = []) {
 
         // 初始化一个cURL对象
         $curl = curl_init();
@@ -16,14 +16,15 @@ class Curl {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
         // 设置超时时间
-        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        $time = $config['connect_timeout'] ? : 10;
+        curl_setopt($curl, CURLOPT_TIMEOUT, $time);
 
         // 设置HTTP METHOD
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $http_method);
 
         // 设置UserAgent
         curl_setopt($curl, CURLOPT_USERAGENT, 'PrismSDK/PHP');
-        
+
         // 设置ssl的版本
         curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 

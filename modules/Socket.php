@@ -39,8 +39,12 @@ class Socket {
         if (!$fp)
             throw new Exception($errstr);
 
+
         if ( function_exists('stream_set_timeout') )
-            stream_set_timeout($fp, 30);
+        {
+            $time = $config['connect_timeout'] ? : 10;
+            stream_set_timeout($fp, $time);
+        }
 
         // 发起请求
         $request = $this->build_head($http_method, $path, $query, $host, $headers, $postData);

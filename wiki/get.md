@@ -25,12 +25,29 @@
 
     echo $client->get('/apple_store/ping');
 
-返回: 
+返回:
 
     "pong"
 
 
 注：具体的返回结果和API的具体实现有关，一般会以JSON格式返回结果。
+
+## 配置项
+
+为了应对诸如网络超时之类的因素，所以增加了配置项。但是兼容以前老的写法，只不过配置为空而已。
+
+```
+//目前支持的配置项：
+$config = array(
+    'connect_timeout' => (float)1.2,//超时时间
+);
+```
+
+```
+//用法
+    $config = ['connect_timeout'=>3];
+    echo $client->get('/apple_store/ping', $params, $headers, $config);
+```
 
 
 [返回](index.md)
