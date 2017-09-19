@@ -4,5 +4,7 @@
 test/report
 /Diagram.pptx
 /Plan.xlsx
+composer.lock
+/vendor
 *.swp
 *.swo
