@@ -16,7 +16,7 @@ class Curl {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
         // 设置超时时间
-        $time = $config['connect_timeout'] ? : 10;
+	$time = isset($config['connect_timeout']) ? $config['connect_timeout'] : 10;
         curl_setopt($curl, CURLOPT_TIMEOUT, $time);
 
         // 设置HTTP METHOD
