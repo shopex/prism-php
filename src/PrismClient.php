@@ -55,14 +55,14 @@ Class PrismClient extends Notify {
     /**
     * GET
     */
-    public function get ($path, $params = null, $headers = null, $config = array()) {
+    public function get ($path, $params = null, $headers = array(), $config = array()) {
         return $this->createRequest('GET', $path, $headers, $params, $config);
     }
 
     /**
     * POST
     */
-    public function post ($path, $params = null, $headers = null, $config = array()) {
+    public function post ($path, $params = null, $headers = array(), $config = array()) {
         return $this->createRequest('POST', $path, $headers, $params, $config);
     }
 
