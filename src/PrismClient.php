@@ -69,14 +69,14 @@ Class PrismClient extends Notify {
     /**
     * PUT
     */
-    public function put ($path, $params = null, $headers = null, $config = array()) {
+    public function put ($path, $params = null, $headers = array(), $config = array()) {
         return $this->createRequest('PUT', $path, $headers, $params, $config);
     }
 
     /**
     * DELETE
     */
-    public function delete ($path, $params = null, $headers = null, $config = array()) {
+    public function delete ($path, $params = null, $headers = array(), $config = array()) {
         return $this->createRequest('DELETE', $path, $headers, $params, $config);
     }
 
