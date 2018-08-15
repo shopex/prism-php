@@ -23,6 +23,7 @@ class Requester {
         // 准备query, headers, postData
         $query    = array();
         $postData = array();
+        $headers = array();
 
         $headers['Pragma']        = 'no-cache';
         $headers['Cache-Control'] = 'no-cache';
