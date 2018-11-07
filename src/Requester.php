@@ -57,7 +57,7 @@ class Requester {
         $query['sign'] = PrismSign::produce($http_method, $url_arr['path'], $headers, $query, $postData, $this->app_secret);
 
         // https
-        if ($url_arr['scheme'] == 'https') {
+        if (isset($url_arr['scheme']) && $url_arr['scheme'] == 'https') {
             $query                  = array();
             $query['client_id']     = $this->app_key;
             $query['client_secret'] = $this->app_secret;
