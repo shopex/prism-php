@@ -44,8 +44,10 @@ class Requester {
             break;
 
         }
-        parse_str($url_arr['query'], $tmp_query);
-        $query = array_merge($query, $tmp_query);
+        if(isset($url_arr['query'])){
+            parse_str($url_arr['query'], $tmp_query);
+            $query = array_merge($query, $tmp_query);          
+        }
         $query['client_id']   = $this->app_key;
         $query['sign_method'] = 'md5';
         $query['sign_time']   = time();
