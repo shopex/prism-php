@@ -1,5 +1,5 @@
 <?php
-class Socket {
+class PrismSocket {
     private $socket;
     function __construct($socket=null) {
         if ($socket!=null) {
@@ -7,7 +7,7 @@ class Socket {
         }
     }
 
-    public function sendRequest($http_method = 'GET', $url, $headers, $postData = null) {
+    public function sendRequest($http_method, $url, $headers, $postData = null) {
 
         // 准备参数
         $url_arr  = parse_url($url);

@@ -79,16 +79,16 @@ class Requester {
     */
     public function setRequester($string) {
         if ($string == 'curl')
-            $this->http = new Curl();
+            $this->http = new PrismCurl();
 
         if ($string == 'socket')
-            $this->http = new Socket();
+            $this->http = new PrismSocket();
     }
 
     /**
     * 备用http方法
     */
-    public function fileGetContents($http_method = 'GET', $url, $headers, $postData = null) {
+    public function fileGetContents($http_method, $url, $headers, $postData = null) {
 
         $opts = array(
             'http'=>array(

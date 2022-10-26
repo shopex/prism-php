@@ -1,7 +1,7 @@
 <?php
-class Curl {
+class PrismCurl {
 
-    public function sendRequest($http_method = 'GET', $url, $headers, $postData = null, $config = []) {
+    public function sendRequest($http_method, $url, $headers, $postData = null, $config = []) {
 
         // 初始化一个cURL对象
         $curl = curl_init();
