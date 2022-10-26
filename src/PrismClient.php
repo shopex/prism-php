@@ -5,8 +5,8 @@ require_once(__DIR__ . '/Requester.php');
 require_once(__DIR__ . '/Oauth.php');
 require_once(__DIR__ . '/Notify.php');
 
-require_once(__DIR__ . '/../modules/Curl.php');
-require_once(__DIR__ . '/../modules/Socket.php');
+require_once(__DIR__ . '/../modules/PrismCurl.php');
+require_once(__DIR__ . '/../modules/PrismSocket.php');
 require_once(__DIR__ . '/../modules/PrismSign.php');
 require_once(__DIR__ . '/../modules/PrismException.php');
 require_once(__DIR__ . '/../modules/PrismClientUtil.php');
@@ -42,12 +42,12 @@ Class PrismClient extends Notify {
         }
 
         if ($socket!=null) {
-            $this->http = new Socket( $socket );
+            $this->http = new PrismSocket( $socket );
         } else {
             if (extension_loaded('curl'))
-                $this->http = new Curl();
+                $this->http = new PrismCurl();
             else
-                $this->http = new Socket();
+                $this->http = new PrismSocket();
         }
 
     }
